@@ -1,32 +1,29 @@
-name: Deploy React App to Hostinger
+name: Generate a build and push to another branch
 
 on:
   push:
     branches:
-      - master  # Changez cela en votre branche principale, par exemple 'master'
+      - master
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    name: Build and Push
     steps:
-      - name: Checkout code
+      - name: git-checkout
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'  # Utilisez la version Node.js que vous préférez
-
-      - name: Install dependencies
+      - name: Install all dependencies
         run: npm install
 
-      - name: Build React App
-        run: npm run build
+      - name: Build
+        run: npm run build # The build command of your project
 
-      - name: Deploy to Hostinger
+      - name: Push
         uses: s0/git-publish-subdir-action@develop
-        with:
-          repository: Apalian/portfolio
-          branch: build
-          token: ${{ secrets.GH_TOKEN }}
-          folder: build
+        env:
+          REPO: self
+          BRANCH: build # The branch name where you want to push the assets
+          FOLDER: build # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
