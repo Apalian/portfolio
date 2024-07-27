@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "https://portfolio.lespi.fr/static/css/main.43453e74.css",
-    "main.js": "https://portfolio.lespi.fr/static/js/main.28924a1a.js",
+    "main.css": "https://portfolio.lespi.fr/static/css/main.6d9660a2.css",
+    "main.js": "https://portfolio.lespi.fr/static/js/main.972cf07a.js",
     "static/js/453.1407b060.chunk.js": "https://portfolio.lespi.fr/static/js/453.1407b060.chunk.js",
+    "static/media/background.gif": "https://portfolio.lespi.fr/static/media/background.2788ebd342732e8c5f94.gif",
     "static/media/background.webp": "https://portfolio.lespi.fr/static/media/background.d3e499ee838d4ea2a36c.webp",
-    "static/media/cn-flag.svg": "https://portfolio.lespi.fr/static/media/cn-flag.ad2f48587ecc344fb03d8fd3e66ae68a.svg",
-    "static/media/uk-flag.svg": "https://portfolio.lespi.fr/static/media/uk-flag.4d8c2df04fcb95a2a639143c22a2c52d.svg",
+    "static/media/cn-flag.svg": "https://portfolio.lespi.fr/static/media/cn-flag.592316d0a0d29074d35413ec5c17792c.svg",
+    "static/media/uk-flag.svg": "https://portfolio.lespi.fr/static/media/uk-flag.9c1cf76a86787c2da4b9fa773eee859a.svg",
     "index.html": "https://portfolio.lespi.fr/index.html",
-    "static/media/fr-flag.svg": "https://portfolio.lespi.fr/static/media/fr-flag.aa204351370271307f7879439230965b.svg",
-    "main.43453e74.css.map": "https://portfolio.lespi.fr/static/css/main.43453e74.css.map",
-    "main.28924a1a.js.map": "https://portfolio.lespi.fr/static/js/main.28924a1a.js.map",
+    "static/media/fr-flag.svg": "https://portfolio.lespi.fr/static/media/fr-flag.9d3b64c9553dec68e843e90fe79b34b5.svg",
+    "main.6d9660a2.css.map": "https://portfolio.lespi.fr/static/css/main.6d9660a2.css.map",
+    "main.972cf07a.js.map": "https://portfolio.lespi.fr/static/js/main.972cf07a.js.map",
     "453.1407b060.chunk.js.map": "https://portfolio.lespi.fr/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.43453e74.css",
-    "static/js/main.28924a1a.js"
+    "static/css/main.6d9660a2.css",
+    "static/js/main.972cf07a.js"
   ]
 }
