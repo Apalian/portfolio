@@ -1,12 +1,18 @@
+/* About.css */
+
+/* Style pour la section About */
 .about {
-    background-color: #f4f4f4;
+    position: relative; /* Pour que les éléments enfants positionnés absolument se réfèrent à ce conteneur */
     padding: 50px 20px;
     text-align: center;
+    overflow: hidden; /* Assure que les formes ne débordent pas */
 }
 
 .about-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative; /* Assure que le contenu reste au-dessus des formes */
+    z-index: 1; /* Assure que le contenu est au-dessus */
 }
 
 .about h2 {
@@ -17,4 +23,23 @@
 .about p {
     font-size: 1.2em;
     line-height: 1.6;
+}
+
+/* Style pour les formes géométriques */
+.shapes-container {
+    position: absolute; /* Positionné absolument pour couvrir la section */
+    top: 0;
+    left: 0;
+    width: 100%; /* Couvre toute la largeur de la section */
+    height: 100%; /* Couvre toute la hauteur de la section */
+    overflow: hidden; /* Assure que les formes ne débordent pas */
+    pointer-events: none; /* Les formes ne doivent pas interférer avec les interactions utilisateur */
+    z-index: -1; /* Positionne derrière le contenu principal */
+}
+
+.shape {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.1); /* Couleur noire avec faible opacité */
+    mix-blend-mode: multiply; /* Augmente la nuance de gris lors des superpositions */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur et la hauteur totales */
 }

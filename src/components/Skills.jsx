@@ -37,8 +37,9 @@ const Skill = ({ icon, name, level }) => {
 const Skills = () => {
     return (
         <section className="skills-section">
+            <h2>Compétences</h2>
             <div className="skills-category">
-                <h2>Development Skills</h2>
+                <h3>Développement</h3>
                 <div className="skills">
                     {devSkills.map((skill, index) => (
                         <Skill key={index} {...skill} />
@@ -46,7 +47,7 @@ const Skills = () => {
                 </div>
             </div>
             <div className="skills-category">
-                <h2>Language Skills</h2>
+                <h3>Langage</h3>
                 <div className="skills">
                     {langSkills.map((skill, index) => (
                         <Skill key={index} {...skill} />
