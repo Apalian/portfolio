@@ -1,10 +1,14 @@
 .navbar {
     background-color: #333;
+    background: rgba(20%,20%,20%,0.5);
     color: #fff;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    border-radius: 90px;
+    position: fixed;
+    top: 20px;
+    left: 10px;
 }
 
 .navbar-logo {
@@ -16,6 +20,7 @@
 .navbar-menu {
     list-style: none;
     display: flex;
+    padding: 0;
 }
 
 .navbar-item {
@@ -29,5 +34,5 @@
 }
 
 .navbar-link:hover {
-    text-decoration: underline;
+    color: #ccc;
 }
