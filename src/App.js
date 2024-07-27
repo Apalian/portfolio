@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import profile from 'components/profile'
-import Profile from "components/profile";
+import Profile from "./components/profile";
 
 function App() {
   return (
