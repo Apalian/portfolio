@@ -12,28 +12,50 @@ import './App.css';
 function App() {
     const shapes = Array.from({ length: 128 }, (_, i) => ({
         id: i,
-        top: Math.random() * 90, // Initial position as a percentage of the viewport height
-        left: Math.random() * 90, // Initial position as a percentage of the viewport width
-        size: Math.random() * 60 + 20, // Size between 20px and 80px
-        opacity: Math.random() * 0.3 + 0.1 // Opacity between 0.1 and 0.4
+        top: Math.random() * 90,
+        left: Math.random() * 90,
+        size: Math.random() * 60 + 20,
+        opacity: Math.random() * 0.3 + 0.1,
+        rotation: Math.random() * 360, // Initial rotation
+        duration: 40000
     }));
 
     useEffect(() => {
         shapes.forEach(shape => {
-            animate({
-                from: { top: shape.top, left: shape.left },
-                to: { top: Math.random() * 90, left: Math.random() * 90 },
-                duration: Math.random() * 10000 + 10000, // Duration between 10s and 20s
-                repeat: Infinity,
-                repeatType: 'mirror',
-                onUpdate: ({ top, left }) => {
-                    const element = document.getElementById(`shape-${shape.id}`);
-                    if (element) {
-                        element.style.top = `${top}vh`;
-                        element.style.left = `${left}vw`;
+            const animateMovement = () => {
+                animate({
+                    from: { top: shape.top, left: shape.left },
+                    to: { top: Math.random() * 90, left: Math.random() * 90 },
+                    duration: shape.duration,
+                    repeat: Infinity,
+                    repeatType: 'mirror',
+                    onUpdate: ({ top, left }) => {
+                        const element = document.getElementById(`shape-${shape.id}`);
+                        if (element) {
+                            element.style.top = `${top}vh`;
+                            element.style.left = `${left}vw`;
+                        }
                     }
-                }
-            });
+                });
+            };
+
+            const animateRotation = () => {
+                animate({
+                    from: shape.rotation,
+                    to: shape.rotation + 360,
+                    duration: shape.duration * 2,
+                    repeat: Infinity,
+                    onUpdate: rotation => {
+                        const element = document.getElementById(`shape-${shape.id}`);
+                        if (element) {
+                            element.style.transform = `rotate(${rotation}deg)`;
+                        }
+                    }
+                });
+            };
+
+            animateMovement();
+            animateRotation();
         });
     }, [shapes]);
 
@@ -50,7 +72,8 @@ function App() {
                             left: `${shape.left}vw`,
                             width: `${shape.size}px`,
                             height: `${shape.size}px`,
-                            opacity: shape.opacity
+                            opacity: shape.opacity,
+                            transform: `rotate(${shape.rotation}deg)`
                         }}
                     ></div>
                 ))}
