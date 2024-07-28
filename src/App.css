@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -8,6 +12,10 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #f9f9f9;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .container {
@@ -19,4 +27,29 @@ body {
 section {
   padding: 50px 20px;
   text-align: center;
+}
+
+.shapes-container {
+  position: fixed; /* Fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none; /* Ensures shapes do not interfere with user interactions */
+  z-index: -1; /* Positions behind the main content */
+}
+
+.shape {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1); /* Black color with low opacity */
+  mix-blend-mode: multiply; /* Increases gray shade when overlapping */
+  box-sizing: border-box;
+}
+
+.App {
+  position: relative;
+  z-index: 1; /* Ensure content is above shapes */
+  height: 100%;
+  width: 100%;
 }
