@@ -36,7 +36,7 @@ const Skill = ({ icon, name, level }) => {
 
 const Skills = () => {
     return (
-        <section className="skills-section">
+        <section id="skills" className="skills-section">
             <h2>Compétences</h2>
             <div className="skills-category">
                 <h3>Développement</h3>

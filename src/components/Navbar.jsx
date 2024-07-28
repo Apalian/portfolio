@@ -3,6 +3,7 @@ import React from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
+    // Fonction pour faire défiler vers une section
     const handleScroll = (sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
@@ -14,13 +15,22 @@ const Navbar = () => {
         <nav className="navbar">
             <ul className="navbar-menu">
                 <li className="navbar-item">
-                    <a href="#hero" className="navbar-link" onClick={() => handleScroll('hero')}>Home</a>
+                    <span className="navbar-link" onClick={() => handleScroll('hero')}>Accueil</span>
                 </li>
                 <li className="navbar-item">
-                    <a href="#about" className="navbar-link" onClick={() => handleScroll('about')}>About</a>
+                    <span className="navbar-link" onClick={() => handleScroll('about')}>À propos</span>
                 </li>
                 <li className="navbar-item">
-                    <a href="#projects" className="navbar-link" onClick={() => handleScroll('projects')}>Work</a>
+                    <span className="navbar-link" onClick={() => handleScroll('skills')}>Compétences</span>
+                </li>
+                <li className="navbar-item">
+                    <span className="navbar-link" onClick={() => handleScroll('timeline')}>Timeline</span>
+                </li>
+                <li className="navbar-item">
+                    <span className="navbar-link" onClick={() => handleScroll('projects')}>Projets</span>
+                </li>
+                <li className="navbar-item">
+                    <span className="navbar-link" onClick={() => handleScroll('contact')}>Contact</span>
                 </li>
             </ul>
         </nav>
