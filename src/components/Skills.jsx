@@ -11,7 +11,7 @@ const devSkills = [
     { icon: <FaPython />, name: 'Python', level: 3 },
     { icon: <FaVuejs />, name: 'Vue.js', level: 2 },
     { icon: <FaJava />, name: 'Java', level: 4 },
-    { icon: <FaReact />, name: 'React', level: 1 },
+    { icon: <FaReact />, name: 'React', level: 2 },
     { icon: <FaGitAlt />, name: 'Git', level: 3 },
 ];
 

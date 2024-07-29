@@ -1,3 +1,4 @@
+/* Projects.css */
 .projects {
     padding: 50px 20px;
 }
@@ -19,7 +20,7 @@
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Align center for better responsiveness */
+    justify-content: center;
 }
 
 .project-item {
@@ -28,16 +29,16 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 10px;
     width: 100%;
-    max-width: 1200px; /* Increase max-width for wider cards */
+    max-width: 1200px;
     padding: 20px;
     display: grid;
-    grid-template-columns: 2fr 1fr; /* 2/3 for description, 1/3 for image */
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
         "header image"
         "description image"
         "footer footer";
-    gap: 20px; /* Add space between grid items */
+    gap: 20px;
 }
 
 .project-header {
@@ -45,6 +46,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%; /* Ensure header takes full width */
 }
 
 .project-header h3 {
@@ -53,29 +55,42 @@
 }
 
 .project-rectangle {
-    grid-area: rectangle;
     background: #000;
     height: 10px;
-    width: 100px; /* Adjust the width of the black rectangle */
+    width: 100px;
     margin-top: 10px;
+    animation: moveRectangle 7s linear infinite;
+}
+
+@keyframes moveRectangle {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .project-description {
     grid-area: description;
     margin: 0;
     line-height: 1.6;
+    text-align: left;
 }
 
 .project-description p {
-    margin-bottom: 1em; /* Add margin between paragraphs */
+    margin-bottom: 1em;
 }
 
 .project-image {
     grid-area: image;
-    max-width: 250px; /* Adjust size of the image */
+    max-width: 250px;
     height: auto;
     object-fit: cover;
-    margin-left: 20px; /* Adjust spacing between image and text */
+    margin-left: 20px;
 }
 
 .project-footer {
