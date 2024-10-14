@@ -56,7 +56,3 @@ h2 {
     border-radius: 50%;
     background-color: #aaa; /* Couleur des cercles vides */
 }
-
-.circle.filled {
-    background-color: #000; /* Couleur des cercles remplis */
-}
