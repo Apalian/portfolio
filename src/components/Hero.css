@@ -19,7 +19,7 @@ html, body {
     overflow: hidden;
 }
 
-.hero h1 {
+.hero span {
     font-size: 9em;
     margin: 0;
     font-family: "Kaushan Script", cursive;
@@ -27,17 +27,6 @@ html, body {
     font-style: normal;
     line-height: 1.2;
     color: white;
-    animation: fadeInSlide 5s forwards;
-}
-
-@keyframes fadeInSlide {
-    0% {
-        opacity: 0; /* Invisible au début */
-    }
-    100% {
-        opacity: 1; /* Visible à la fin */
-
-    }
 }
 
 .background-container {

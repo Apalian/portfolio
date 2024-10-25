@@ -16,7 +16,7 @@ const PersonalProjects = () => {
             Cette approche permet d'offrir une expérience unique à chaque partie, évitant ainsi toute monotonie. 
             Pour assurer une interface utilisateur moderne et réactive, nous avons choisi Vue.js comme framework 
             JavaScript pour le développement du site. Cependant, Blindio est encore en phase de développement.`,
-            imageUrl: 'https://via.placeholder.com/300',
+            imageUrl: require('../assets/images/blindioCover.png'),
             githubLink: 'https://github.com/username/project1',
             liveLink: 'http://cultio.lespi.ovh',
             tools: ['Git', 'Vue.js', 'MySql', 'Docker', 'Quasar']
@@ -46,8 +46,8 @@ const PersonalProjects = () => {
                                 <div className="project-description">
                                     {project.description}
                                 </div>
-                            <div className="project-image">
-                                <img src={project.imageUrl} alt={project.title} />
+                            <div className="project-image-container">
+                                <img className="project-image" src={project.imageUrl} alt={project.title} />
                             </div>
                             <div className="project-footer">
                                 <div className="project-links">
