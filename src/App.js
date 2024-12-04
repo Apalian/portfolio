@@ -13,7 +13,7 @@ import DevBanner from "./components/DevBanner";
 function App() {
     return (
         <div>
-            <Background /> {/* Ajouter le composant Background */}
+            <Background />
             <main className="App">
                 <Navbar />
                 <DevBanner />
