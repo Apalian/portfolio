@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import Timeline from "./components/Timeline";
 import Background from './components/Background';
 import './App.css';
+import DevBanner from "./components/DevBanner";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Background /> {/* Ajouter le composant Background */}
             <main className="App">
                 <Navbar />
+                <DevBanner />
                 <Hero id="hero" />
                 <About id="about" />
                 <Skills id="skills" />
