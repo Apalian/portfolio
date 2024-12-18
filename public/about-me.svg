@@ -1,0 +1,18 @@
+<svg
+        width="48"
+        height="48"
+        viewBox="0 0 48 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-labelledby="title"
+        role="img"
+>
+    <title id="title">About Me</title>
+    <!-- Tête -->
+    <circle cx="24" cy="14" r="10" fill="black" />
+    <!-- Buste (demi-sphère) -->
+    <path
+            d="M24 26C13 26 4 35 4 46H44C44 35 35 26 24 26Z"
+            fill="black"
+    />
+</svg>
