@@ -2,9 +2,8 @@
 .card{
     background-color: #f9f9f9;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 20px;
-    border : 7px solid;
+
+    border-radius: 16px;
     width: 200px;
     height: 250px;
     display: flex;
@@ -14,6 +13,7 @@
     padding: 8px;
     margin: 16px;
 }
+
 
 .cardImage{
     height: 100%;
