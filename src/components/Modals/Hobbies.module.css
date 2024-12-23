@@ -1,0 +1,33 @@
+.hobbiesContainer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.hobbiesList {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.hobby {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+}

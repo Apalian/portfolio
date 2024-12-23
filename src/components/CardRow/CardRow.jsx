@@ -14,7 +14,7 @@ function getPosition(element) {
     return xPosition; // Retourne seulement la coordonnée X
 }
 
-function CardRow({ cardsData }) {
+function CardRow({ cardsData, delay = 0, animation = "loopMove"}) {
     const screenWidth = window.innerWidth;
     const refs = useRef([]); // Tableau de références pour les cartes
     const [positions, setPositions] = useState([]); // État pour stocker les positions
@@ -30,25 +30,29 @@ function CardRow({ cardsData }) {
     return (
         <div className={styles.cardRow}>
             {cardsData.map((data, index) => {
-                // Calcul de la position cible : xPosition * index + 1
-                const startX =  0; // Utilise la position réelle ou 0 par défaut
+                const startX =  0;
                 const offsetX = positions[index];
-                const targetX = 250 + offsetX; // Applique la formule
+                const targetX = 1000 + offsetX;
 
                 return (
                     <motion.div
                         key={index}
-                        ref={(el) => (refs.current[index] = el)} // Associer chaque ref à un élément
+                        ref={(el) => (refs.current[index] = el)}
                         initial={{ x: startX }}
-                        animate={{ x: [-targetX, screenWidth - offsetX] }}
+                        variants={{
+                            loopMove: { x: [screenWidth - offsetX,-targetX] },
+                            invertLoopMove: { x: [500  - targetX, screenWidth - offsetX + 500] },
+                        }}
+                        animate={animation}
                         transition={{
-                            duration: 2,
+                            duration: 21,
                             repeat: Infinity,
                             ease: "linear",
+                            delay:index * 3 + delay,
                         }}
                         className={styles.motionCard}
                     >
-                        <Card title={data.title} image={data.image} />
+                        <Card content={data.content} image={data.image} />
                     </motion.div>
                 );
             })}

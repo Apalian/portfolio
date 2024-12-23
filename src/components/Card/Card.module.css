@@ -1,11 +1,11 @@
 
 .card{
-    background-color: #f9f9f9;
+    background-color: #121212;
     overflow: hidden;
-
     border-radius: 16px;
-    width: 200px;
-    height: 250px;
+    border: 8px solid #121212;
+    width: 180px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
