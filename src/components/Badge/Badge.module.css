@@ -1,0 +1,42 @@
+.badge {
+    display: flex;
+    align-items: center;
+    background-color: #000; /* Entièrement noir */
+    color: #fff;
+    border-radius: 999px; /* Bords entièrement arrondis */
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    width: auto;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+    background-color: #333;
+}
+
+.badgeIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.badgeTitle {
+    font-size: 1rem;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .badge {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .badgeIcon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .badgeTitle {
+        font-size: 0.9rem;
+    }
+}
