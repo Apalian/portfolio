@@ -7,7 +7,6 @@ function Card({ content, image }) {
     const { openModal } = useContext(ModalContext);
 
     const handleClick = () => {
-        console.log(content);
         openModal(content);
         };
 

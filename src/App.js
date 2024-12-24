@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import './App.css'
 import CardRow from './components/CardRow/CardRow';
-import Modal from './components/Modal/Modal';
 import Hobbies from "./components/Modals/Hobbies";
 import {ModalContext} from "./components/Modal/ModalContext";
 
@@ -28,7 +27,7 @@ const cardRow2 = [
 ];
 
 const cardRow3 = [
-    { content: <Hobbies/>, image: "/Climbing.svg" },
+    { content: <Hobbies/>, image: "/Escalade.svg" },
     { },
     { },
     { },
@@ -46,7 +45,6 @@ function App() {
                 <CardRow cardsData={cardRow1} delay={1}/>
                 <CardRow cardsData={cardRow2} animation={"invertLoopMove"}/>
                 <CardRow cardsData={cardRow3} delay={2}/>
-                {isModalOpen && <Modal onClose={closeModal}>{modalContent}</Modal>}
             </main>
         </div>
     );
