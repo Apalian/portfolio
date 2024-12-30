@@ -37,7 +37,7 @@ const cardRow3 = [
 ];
 
 function App() {
-    const { isModalOpen, modalContent, closeModal } = useContext(ModalContext);
+    useContext(ModalContext);
 
     return (
         <div className="App">

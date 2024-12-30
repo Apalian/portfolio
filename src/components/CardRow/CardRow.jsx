@@ -20,28 +20,27 @@ function CardRow({ cardsData, delay = 0, animation = "loopMove"}) {
     const [positions, setPositions] = useState([]); // État pour stocker les positions
 
     useEffect(() => {
-        // Récupère les positions des cartes après le rendu
         const calculatedPositions = refs.current.map((ref, index) =>
             ref ? getPosition(ref) : 0
         );
-        setPositions(calculatedPositions); // Stocke les positions dans le state
-    }, [cardsData]); // Exécuter après le rendu des cartes
+        setPositions(calculatedPositions);
+    }, [cardsData]);
 
     return (
         <div className={styles.cardRow}>
             {cardsData.map((data, index) => {
-                const startX =  0;
-                const offsetX = positions[index];
-                const targetX = 1000 + offsetX;
+                const offsetX = -( 180 + 250);
+                const startX = (screenWidth - positions[index]) - offsetX;
+                const endX = -positions[index] + offsetX;
 
                 return (
                     <motion.div
                         key={index}
                         ref={(el) => (refs.current[index] = el)}
-                        initial={{ x: startX }}
+                        initial={{ x: positions[index] }}
                         variants={{
-                            loopMove: { x: [screenWidth - offsetX,-targetX] },
-                            invertLoopMove: { x: [500  - targetX, screenWidth - offsetX + 500] },
+                            loopMove: { x: [startX, endX] },
+                            invertLoopMove: { x: [endX, startX] },
                         }}
                         animate={animation}
                         transition={{
