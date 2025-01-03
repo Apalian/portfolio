@@ -12,9 +12,14 @@
     justify-content: center;
     padding: 8px;
     margin: 16px;
+    box-shadow: -5px 5px 5px 1px black;
 }
 
 
 .cardImage{
     height: 100%;
+}
+
+.card:hover{
+    box-shadow: -5px 5px 5px 1px white;
 }
