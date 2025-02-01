@@ -1,9 +1,0 @@
-.cardRow{
-    display: flex;
-    gap: 16px;
-    transform: rotate(-5deg);
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 48px;
-    width: 100%;
-}
