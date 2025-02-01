@@ -3,14 +3,14 @@
     <div class="content">
       <h1>
         <span
-  v-for="(letter, index) in letters"
-  :key="index"
-  class="letter"
-  :class="{ 'space': letter === ' ' }"
-  :style="{ animationDelay: `${index * 0.1}s` }"
->
-  {{ letter === ' ' ? ' ' : letter }}
-</span>
+          v-for="(letter, index) in letters"
+          :key="index"
+          class="letter"
+          :class="{ 'space': letter === ' ' }"
+          :style="{ animationDelay: `${index * 0.1}s` }"
+        >
+          {{ letter === ' ' ? ' ' : letter }}
+        </span>
       </h1>
       <button @click="startPortfolio">Get Started</button>
     </div>
@@ -46,7 +46,7 @@ onMounted(() => {
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align content to the top */
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
 }
@@ -54,6 +54,8 @@ onMounted(() => {
 .content {
   text-align: center;
   z-index: 1001;
+  margin-top: 2rem; /* Adjust this value to control the distance of h1 from the top */
+  position: relative; /* Needed for absolute positioning of the button */
 }
 
 h1 {
@@ -63,6 +65,7 @@ h1 {
   font-size: 10rem;
   color: white;
   white-space: nowrap; /* Ensure text stays in one line */
+  margin: 0; /* Remove default margin */
 }
 
 .letter {
@@ -95,7 +98,10 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 2rem; /* Adjust spacing */
+  position: absolute; /* Position the button absolutely */
+  top: 60vh; /* Adjust this value to move the button up or down */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
 }
 
 button:hover {
