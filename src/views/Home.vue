@@ -11,38 +11,43 @@
   
   <script setup lang="ts">
   import Belt from '@/components/Belt.vue';
-  
+  import ClimbingModal from '@/components/modals/ClimbingModal.vue';
+  import WorkoutModal from '@/components/modals/WorkoutModal.vue';
+  import ClimbingShoe from '@/assets/svg/climbing_shoe.svg';
   const belts = [
     {
       direction: 'left', // All cards in this belt move left
       cards: [
-      { title: 'Card 1', description: 'Description 1' },
-        { title: 'Card 2', description: 'Description 2' },
-        { title: 'Card 3', description: 'Description 3' },
-        { title: 'Card 4', description: 'Description 4' },
-        { title: 'Card 5', description: 'Description 5' },
+      { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 1' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 2' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 3' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 4' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 5' },
+
 
       ],
     },
     {
       direction: 'right', // All cards in this belt move right
       cards: [
-      { title: 'Card 1', description: 'Description 1' },
-        { title: 'Card 2', description: 'Description 2' },
-        { title: 'Card 3', description: 'Description 3' },
-        { title: 'Card 4', description: 'Description 4' },
-        { title: 'Card 5', description: 'Description 5' },
+      { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 1' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 2' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 3' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 4' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 5'},
+
 
       ],
     },
     {
       direction: 'left',
       cards: [
-        { title: 'Card 1', description: 'Description 1' },
-        { title: 'Card 2', description: 'Description 2' },
-        { title: 'Card 3', description: 'Description 3' },
-        { title: 'Card 4', description: 'Description 4' },
-        { title: 'Card 5', description: 'Description 5' },
+        { imageUrl: ClimbingShoe, imageAlt: 'Escalade', modalComponent: ClimbingModal },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Musculation', modalComponent: WorkoutModal },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 3' },
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 4'},
+        { imageUrl: 'https://via.placeholder.com/150', imageAlt: 'Card 5' },
+
 
       ],
     },
@@ -51,6 +56,11 @@
   
   <style scoped>
   .portfolio-container {
-    padding: 20px;
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
   }
   </style>

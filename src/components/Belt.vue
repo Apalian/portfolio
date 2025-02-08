@@ -2,11 +2,12 @@
   <div class="belt">
     <Card
       v-for="(card, index) in cards"
-      :key="card.title"
-      :title="card.title"
-      :description="card.description"
+      :key="index"
+      :imageUrl="card.imageUrl"
+      :imageAlt="card.imageAlt"
       :direction="direction"
-      :delay="index * 2" 
+      :delay="index * 2"
+      :modalComponent="card.modalComponent"
     />
   </div>
 </template>
@@ -15,8 +16,12 @@
 import Card from '@/components/Card.vue';
 
 defineProps<{
-  cards: { title: string; description: string }[];
-  direction: string; // Direction of movement for the belt
+  cards: {
+    imageUrl: string;
+    imageAlt: string;
+    modalComponent?: any;
+  }[];
+  direction: string;
 }>();
 </script>
 

@@ -4,31 +4,35 @@
     :class="direction"
     :style="{ transform: `translateX(${initialOffset}px)` }"
   >
-    <div class="card" @mouseover="hover = true" @mouseleave="hover = false">
+    <div class="card" @mouseover="hover = true" @mouseleave="hover = false" @click="openModalHandler">
       <div class="card-content" :class="{ 'card-hover': hover }">
-        <h3>{{ title }}</h3>
-        <p>{{ description }}</p>
+        <img :src="imageUrl" :alt="imageAlt" class="card-image">
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 
 const props = defineProps<{
-  title: string;
-  description: string;
-  direction: string; // Direction of movement
-  delay: number; // Delay for the animation
+  imageUrl: string;
+  imageAlt: string;
+  direction: string;
+  delay: number;
+  modalComponent: any;
 }>();
 
 const hover = ref(false);
+const openModal = inject('openModal') as (component: any) => void;
 
-// Calculate the initial offset based on the delay
+const openModalHandler = () => {
+  openModal(props.modalComponent);
+};
+
 const initialOffset = computed(() => {
   const screenWidth = window.innerWidth;
-  return screenWidth + (screenWidth * props.delay) / 20; // Adjust based on animation speed
+  return screenWidth + (screenWidth * props.delay) / 20;
 });
 </script>
 
@@ -91,5 +95,13 @@ p {
   100% {
     transform: translateX(-100%);
   }
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  padding: 20px;
 }
 </style>
