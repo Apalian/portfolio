@@ -40,7 +40,7 @@ const initialOffset = computed(() => {
 .card-container {
   position: absolute;
   width: 200px;
-  height: 300px;
+  height: 250px;
   animation: move 20s linear infinite;
   box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.9);
   animation-delay: v-bind('delay + "s"'); 
@@ -64,10 +64,13 @@ const initialOffset = computed(() => {
 .card-content {
   width: 100%;
   height: 100%;
-  padding-left: 5px;
+  padding: 10px; /* Réduit le padding pour donner plus d'espace à l'image */
   background-color: white;
   border-radius: 10px;
-  transition:  box-shadow 0.2s ease, transform 0.3s ease; /* Smooth transitions */
+  transition: box-shadow 0.2s ease, transform 0.3s ease;
+  display: flex; /* Ajoute flexbox pour centrer l'image */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
 }
 
 .card-hover {
@@ -100,8 +103,9 @@ p {
 .card-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* Garde le ratio de l'image */
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px; /* Réduit le padding pour donner plus d'espace à l'image */
+  box-sizing: border-box; /* Inclut le padding dans la taille totale */
 }
 </style>

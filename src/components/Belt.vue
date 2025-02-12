@@ -1,14 +1,16 @@
 <template>
   <div class="belt">
-    <Card
-      v-for="(card, index) in cards"
-      :key="index"
-      :imageUrl="card.imageUrl"
-      :imageAlt="card.imageAlt"
-      :direction="direction"
-      :delay="index * 2"
-      :modalComponent="card.modalComponent"
-    />
+    <div class="cards-container">
+      <Card
+        v-for="(card, index) in cards"
+        :key="index"
+        :imageUrl="card.imageUrl"
+        :imageAlt="card.imageAlt"
+        :direction="direction"
+        :delay="index * 4"
+        :modalComponent="card.modalComponent"
+      />
+    </div>
   </div>
 </template>
 
@@ -35,4 +37,5 @@ defineProps<{
   margin-bottom: 20px;
   rotate: -5deg;
 }
+
 </style>

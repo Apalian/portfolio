@@ -14,7 +14,7 @@
     </transition>
 
     <!-- Global Modal -->
-    <transition name="fade">
+    <transition name="modal">
       <div v-if="activeModal" class="modal-overlay" @click="closeModal">
         <div class="modal-content" @click.stop>
           <component :is="activeModal" @close="closeModal" />
@@ -59,7 +59,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #001f3f, #003366, #004080, #00509e);
+  background: linear-gradient(45deg, #001f3f, #003366, #02182e, #021b33);
   background-size: 400% 400%;
   animation: gradientFlow 15s ease infinite;
   z-index: -1; /* Ensure it stays behind other content */
@@ -121,5 +121,65 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transform-origin: center;
+}
+
+/* Animation d'entrée de la modale */
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.6s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .modal-content,
+.modal-leave-to .modal-content {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.modal-enter-active .modal-content {
+  animation: modalOpen 0.6s ease forwards;
+}
+
+.modal-leave-active .modal-content {
+  animation: modalClose 0.6s ease forwards;
+}
+
+@keyframes modalOpen {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  20% {
+    transform: scaleY(0.005);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.005);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes modalClose {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.005);
+  }
+  80% {
+    transform: scaleY(0.005);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
 }
 </style>
