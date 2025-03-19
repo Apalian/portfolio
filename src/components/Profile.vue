@@ -12,7 +12,7 @@ import Links from './Links.vue'
           <Links />
         </div>
       </div>
-      <h2>A <span class="highlight">Junior Data Engineer</span> </h2>
+      <h2>A <span class="highlight">Data Engineering Student</span> </h2>
     </div>
   </div>
   
