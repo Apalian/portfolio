@@ -4,7 +4,7 @@ import Tech from './components/Tech.vue'
 </script>
 
 <template>
-  <Profile/>
+  <Profile/>e
   <Tech/>
 </template>
 
