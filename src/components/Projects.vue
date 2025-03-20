@@ -5,7 +5,7 @@
 
         <ProjectCard 
       name="Blindio" 
-      src="/blindioCover.svg"
+      src="./blindioCover.svg"
       repository="https://github.com/Lespi6/cultio"
       href="http://cultio.lespi.ovh/#/blindio/"
       >
