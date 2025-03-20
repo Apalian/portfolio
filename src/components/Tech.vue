@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="skills-container">
         <h2 class="skills-header">Skills</h2>
         <div>
             <h3 class="skill-header">Languages</h3>
@@ -57,7 +57,7 @@ import Badge from './Badge.vue';
 </script>
 
 <style>
-.container{
+.skills-container{
     margin-left: 9em;
 }
 .skills-header{
