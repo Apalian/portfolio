@@ -34,7 +34,7 @@ export default {
       type: String,
       required: true
     },
-    reporsitory: {
+    repository: {
       type: String,
     },
     href: {
@@ -93,12 +93,13 @@ export default {
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
   padding: 20px;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .overlay.visible {
@@ -109,7 +110,7 @@ export default {
   color: white;
   font-size: 2.2em;
   margin-bottom: 10px;
-  text-align: left;
+  text-align: center;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -118,24 +119,26 @@ export default {
 
 .content-row {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 12px;
+
 }
 
 .badges-container {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   overflow: hidden;
-  flex: 1;
 }
 
 .action-icons {
   display: flex;
   gap: 8px;
-  margin-left: 12px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 .icon-link {

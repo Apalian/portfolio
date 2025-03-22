@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import Profile from './components/Profile.vue'
-import Tech from './components/Tech.vue'
+import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
 import Credit from './components/Credit.vue';
+import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
+  <Navbar/>
   <Profile/>
-  <Tech/>
+  <Skills/>
   <Projects/>
   <Credit/>
 </template>

@@ -49,10 +49,31 @@
                         <use xlink:href="#s" transform="translate(300,270) rotate(20.659808)"/>
                     </svg>
                 </span>
+                <!-- Inline Sun Icon -->
+                <span v-else-if="isToggled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <circle cx="12" cy="12" r="5" fill="yellow"/>
+                        <line x1="12" y1="1" x2="12" y2="4" stroke="yellow" stroke-width="2"/>
+                        <line x1="12" y1="20" x2="12" y2="23" stroke="yellow" stroke-width="2"/>
+                        <line x1="4" y1="4" x2="6" y2="6" stroke="yellow" stroke-width="2"/>
+                        <line x1="18" y1="18" x2="20" y2="20" stroke="yellow" stroke-width="2"/>
+                        <line x1="1" y1="12" x2="4" y2="12" stroke="yellow" stroke-width="2"/>
+                        <line x1="20" y1="12" x2="23" y2="12" stroke="yellow" stroke-width="2"/>
+                        <line x1="4" y1="20" x2="6" y2="18" stroke="yellow" stroke-width="2"/>
+                        <line x1="18" y1="6" x2="20" y2="4" stroke="yellow" stroke-width="2"/>
+                    </svg>
+                </span>
+                <!-- Inline Moon Icon -->
+                <span v-else>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.76 0 3.41-.48 4.85-1.3-.07-.17-.13-.35-.2-.52-.61-1.48-1.75-2.63-3.23-3.23-.18-.07-.35-.13-.52-.2-.82 1.44-2.33 2.44-4.07 2.44C7.57 19 4 15.43 4 12S7.57 5 12 5c2.7 0 5.01 1.6 6.14 3.9 1.69-.58 2.86-2.22 2.86-4.1 0-2.48-2.02-4.5-4.5-4.5z" fill="gray"/>
+                    </svg>
+                </span>
             </span>
         </button>
     </div>
 </template>
+
 
 <script setup>
 import { reactive, ref } from 'vue';
