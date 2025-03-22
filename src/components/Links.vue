@@ -52,11 +52,23 @@
             <span>Copied to clipboard!</span>
             <button class="toast-close" @click="dismissToast">&times;</button>
         </div>
+    <a @click="copyEmail" class="email-link" title="Copier l'adresse email"
+      ><img src="/mail.svg" alt="Mail"
+    /></a>
+    <a href="./resume.pdf" download="resume.pdf" class="resume">
+      <img src="/file.svg" alt="Resume" />
+      <span>Resume</span>
+    </a>
+
+    <div class="toast" :class="{ 'show-toast': showToast }">
+      <span>Copied to clipboard!</span>
+      <button class="toast-close" @click="dismissToast">&times;</button>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const showToast = ref(false);
 let toastTimeout: number | null = null;
@@ -83,11 +95,11 @@ const copyEmail = () => {
 };
 
 const dismissToast = () => {
-    showToast.value = false;
-    if (toastTimeout) {
-        clearTimeout(toastTimeout);
-        toastTimeout = null;
-    }
+  showToast.value = false;
+  if (toastTimeout) {
+    clearTimeout(toastTimeout);
+    toastTimeout = null;
+  }
 };
 </script>
 
@@ -150,8 +162,8 @@ a {
 }
 
 .show-toast {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .toast-close {
