@@ -52,19 +52,7 @@
             <span>Copied to clipboard!</span>
             <button class="toast-close" @click="dismissToast">&times;</button>
         </div>
-    <a @click="copyEmail" class="email-link" title="Copier l'adresse email"
-      ><img src="/mail.svg" alt="Mail"
-    /></a>
-    <a href="./resume.pdf" download="resume.pdf" class="resume">
-      <img src="/file.svg" alt="Resume" />
-      <span>Resume</span>
-    </a>
-
-    <div class="toast" :class="{ 'show-toast': showToast }">
-      <span>Copied to clipboard!</span>
-      <button class="toast-close" @click="dismissToast">&times;</button>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
