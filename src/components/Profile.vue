@@ -81,6 +81,7 @@ import PropsSwitcher from './PropsSwitcher.vue';
   width: 16px;
   height: 16px;
   stroke: var(--secondary-color);
+  transition: stroke 0.4s ease;
 }
 
 .location-path {
@@ -120,4 +121,5 @@ div {
 p {
   font-size: 1.1em;
 }
+
 </style>
