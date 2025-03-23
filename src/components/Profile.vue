@@ -3,13 +3,13 @@
     <img src="/PP.jpg" alt="Profile picture" />
     <div class="profile-info">
       <div class="name-links-container">
-        <h1>Hey, I'm Lespilette Colin 👋</h1>
+        <h1>{{ helloText }}</h1>
         <div class="links-wrapper">
           <PropsSwitcher />
           <Links />
         </div>
       </div>
-      <h2>A <span class="highlight">Data Engineering Student</span></h2>
+      <h2></h2>
     </div>
   </div>
 
@@ -26,15 +26,51 @@
           class="location-path"
         ></path>
       </svg>
-      <p>Toulouse, France</p>
+      <p></p>
     </div>
-    <p class="bio-text">I'm 19 years old and currently in my second year of a Bachelor of Technology in Computer Science.</p>
+    <p class="bio-text"></p>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import Links from './Links.vue'
 import PropsSwitcher from './PropsSwitcher.vue';
+import { computed, watch } from 'vue'
+import { useLanguage } from '../utils/language.js';
+
+const { language } = useLanguage()
+console.log('langue :', language);
+
+const translations = {
+  en : {
+    'hello-text' : "Hey, I'm Lespilette Colin 👋",
+    'job-text' : 'A <span class="highlight">Data Engineering Student</span>',
+    'location-text' : "Toulouse, France",
+    'about-text' : "I'm 19 years old and currently in my second year of a Bachelor of Technology in Computer Science."
+  },
+  fr : {
+    'hello-text' : "Bonjour, je suis Lespilette Colin 👋",
+    'job-text' : 'Un <span class="highlight">Étudiant en Data</span>',
+    'location-text' : "Toulouse, France",
+    'about-text' : "J'ai 19 ans et je suis actuellement en deuxième année de BUT informatique"
+  },
+  zh : {
+    'hello-text' : "你好，我的名字是 Lespilette Colin 👋",
+    'job-text' : '一个<span class="highlight">数据工程学生</span>',
+    'location-text' : "Toulouse, 法国",
+    'about-text' : "我十九岁. 目前我在攻读计算机科学的技术学士第二年."
+  }
+}
+// Propriétés calculées pour obtenir les traductions
+const helloText = computed(() => translations[language.value]?.['hello-text'] || 'Texte non disponible');
+const locationText = computed(() => translations[language.value]?.['location-text'] || 'Localisation non disponible');
+const aboutText = computed(() => translations[language.value]?.['about-text'] || 'À propos non disponible');
+
+watch(language, (newLang) => {
+  console.log('La langue a changé:', newLang);
+});
+
+
 </script>
 
 <style scoped>

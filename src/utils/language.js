@@ -24,7 +24,6 @@ export function useLanguage() {
 
     return{
         language,
-        useLanguage,
         cycleLanguage,
         setLanguage,
         availableLanguages
