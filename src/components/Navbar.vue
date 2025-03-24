@@ -3,25 +3,25 @@
       <nav class="navbar-container">
         <ul class="link-container">
           <li class="nav-item">
-            <a href="#" class="nav-link" @click="scrollToSection()">Home</a>
+            <a href="#" class="nav-link" @click="scrollToSection()">{{ Home }}</a>
           </li>
           <li class="nav-item">
             <div class="vertical-bar"></div>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link" @click="scrollToSection('skills')">Skills</a>
+            <a href="#" class="nav-link" @click="scrollToSection('skills')">{{ Skills }}</a>
           </li>
           <li class="nav-item">
             <div class="vertical-bar"></div>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link" @click="scrollToSection('projects')">Projects</a>
+            <a href="#" class="nav-link" @click="scrollToSection('projects')">{{ Projects }}</a>
           </li>
           <li class="nav-item">
             <div class="vertical-bar"></div>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link" @click="scrollToSection('contact')">Contact</a>
+            <a href="#" class="nav-link" @click="scrollToSection('contact')">{{ Contact }}</a>
           </li>
         </ul>
       </nav>
@@ -30,6 +30,38 @@
   </template>
   
   <script setup>
+import { computed } from 'vue'
+import { useLanguage } from '../utils/language.js';
+
+const { language } = useLanguage()
+
+const translations = {
+  en : {
+    'home-text' : "Home",
+    'skills-text' : 'Skills',
+    'projects-text' : "Projects",
+    'contact-text' : "Contact"
+  },
+  fr : {
+    'home-text' : "Accueil",
+    'skills-text' : 'Compétences',
+    'projects-text' : "Projets",
+    'contact-text' : "Me Contacter"
+  },
+  zh : {
+    'home-text' : "主页",
+    'skills-text' : '技能',
+    'projects-text' : "项目",
+    'contact-text' : "联系我"
+  }
+}
+// Propriétés calculées pour obtenir les traductions
+const Home = computed(() => translations[language.value]?.['home-text'] || 'Texte non disponible');
+const Skills = computed(() => translations[language.value]?.['skills-text'] || 'Texte non disponible');
+const Projects = computed(() => translations[language.value]?.['projects-text'] || 'Localisation non disponible');
+const Contact = computed(() => translations[language.value]?.['contact-text'] || 'À propos non disponible');
+
+
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {

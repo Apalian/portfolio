@@ -9,7 +9,7 @@
           <Links />
         </div>
       </div>
-      <h2></h2>
+      <h2 v-html="jobText"></h2>
     </div>
   </div>
 
@@ -26,20 +26,19 @@
           class="location-path"
         ></path>
       </svg>
-      <p></p>
+      <p>{{ locationText }}</p>
     </div>
-    <p class="bio-text"></p>
+    <p class="bio-text">{{ aboutText }}</p>
   </div>
 </template>
 
 <script setup>
 import Links from './Links.vue'
 import PropsSwitcher from './PropsSwitcher.vue';
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useLanguage } from '../utils/language.js';
 
 const { language } = useLanguage()
-console.log('langue :', language);
 
 const translations = {
   en : {
@@ -63,17 +62,13 @@ const translations = {
 }
 // Propriétés calculées pour obtenir les traductions
 const helloText = computed(() => translations[language.value]?.['hello-text'] || 'Texte non disponible');
+const jobText = computed(() => translations[language.value]?.['job-text'] || 'Texte non disponible');
 const locationText = computed(() => translations[language.value]?.['location-text'] || 'Localisation non disponible');
 const aboutText = computed(() => translations[language.value]?.['about-text'] || 'À propos non disponible');
 
-watch(language, (newLang) => {
-  console.log('La langue a changé:', newLang);
-});
-
-
 </script>
 
-<style scoped>
+<style>
 .profile-header {
   display: flex;
   align-items: center;
