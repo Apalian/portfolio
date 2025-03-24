@@ -27,7 +27,7 @@ const projects = {
         repository : "https://github.com/Lespi6/cultio",
         href : "http://cultio.lespi.ovh/#/blindio/",
         badges : ["Vue.js", "Node.js", "DockerFile", "SQL"]
-    },
+    },  
 }
 
 </script>
@@ -38,8 +38,8 @@ const projects = {
 }
 .projects-container{
     display: flex;
-    flex-direction: column;
-    column-gap: 4px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     margin-left: 2em;
 }
 </style>
