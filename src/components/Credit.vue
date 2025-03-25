@@ -1,26 +1,24 @@
 <template>
-    <div class="credit-container">
-        <p>v1.0.1-beta</p>
-        <p>Made by <span class="credit-highlight">Apalian</span></p>
-        <p>2025 All rights reserved</p>
-    </div>
+  <div class="credit-container">
+    <p>v1.1.0</p>
+    <p>Made by <span class="credit-highlight">Apalian</span></p>
+    <p>2025 All rights reserved</p>
+  </div>
 </template>
 <style>
-.credit-container{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-margin: 16px;
+.credit-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
 }
 p {
-    margin: 0;
+  margin: 0;
 }
 .credit-highlight {
-    color: #ffd900;
-    text-shadow: 0 0 5px rgba(255, 217, 0, 0.9), 
-                 0 0 15px rgba(255, 217, 0, 0.6), 
-                 0 0 20px rgba(255, 255, 255, 0.4);
+  color: #ffd900;
+  text-shadow: 0 0 5px rgba(255, 217, 0, 0.9), 0 0 15px rgba(255, 217, 0, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.4);
 }
-
 </style>
