@@ -50,7 +50,7 @@
             <div class="skills-section">
                 <h3 class="section-header">{{ Skill5 }}</h3>
                 <div class="badge-container">
-                    <Badge text="Agile" />
+                    <Badge text="Agiles" />
                     <Badge text="Git" />
                 </div>
             </div>
