@@ -1,13 +1,14 @@
 <template>
+  <div class="links-wrapper">
+          <PropsSwitcher />
+          <Links />
+  </div>
   <div class="profile-header">
     <img src="/PP.jpg" alt="Profile picture" />
     <div class="profile-info">
       <div class="name-links-container">
         <h1>{{ helloText }}</h1>
-        <div class="links-wrapper">
-          <PropsSwitcher />
-          <Links />
-        </div>
+
       </div>
       <h2 v-html="jobText"></h2>
     </div>
@@ -137,9 +138,8 @@ const aboutText = computed(() => translations[language.value]?.['about-text']);
 }
 
 .links-wrapper {
-  margin-left: auto;
   display: flex;
-  gap: 16px;
+  justify-content: end;
 }
 
 .bio-text {
