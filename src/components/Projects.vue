@@ -1,6 +1,6 @@
 <template>
-    <div class="projects" id="projects">
-        <h1>Projects</h1>
+    <div id="projects">
+        <h1  class="projects">Projects</h1>
         <div class="projects-container">
             <ProjectCard v-for="(project,index) in projects" :key="index"
             :name = "project.name"
@@ -39,12 +39,11 @@ const projects = {
 
 <style>
 .projects{
-    margin-left: 9em;
+    margin-left: 5em;
 }
 .projects-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin-left: 2em;
 }
 </style>
