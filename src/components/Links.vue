@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="socials">
-            <a href="https://www.linkedin.com/in/colin-lespilette/">
+            <a href="https://www.linkedin.com/in/colin-lespilette/" target="_blank">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -13,7 +13,7 @@
                     </g>
                 </svg>
             </a>
-            <a href="https://github.com/Apalian">
+            <a href="https://github.com/Apalian" target="_blank">
                 <svg viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
