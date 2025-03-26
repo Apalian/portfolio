@@ -1,6 +1,6 @@
 <template>
     <div class="credit-container">
-        <p>v1.1.1</p>
+        <p>v2.1.1</p>
         <p>Made by <span class="credit-highlight">Apalian</span></p>
         <p>2025 All rights reserved</p>
     </div>
