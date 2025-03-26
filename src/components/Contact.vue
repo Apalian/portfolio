@@ -327,4 +327,73 @@ export default {
     width: 24px;
     height: 24px;
   }
-  </style>
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 768px) {
+  .form-container {
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+
+  .form-card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .form-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-input, 
+  .form-textarea {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .form-button {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .toast {
+    width: calc(100% - 40px);
+    bottom: 20px;
+    padding: 10px 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-container {
+    padding: 15px 10px;
+  }
+
+  .form-card {
+    padding: 15px;
+  }
+
+  .form-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .form-label {
+    font-size: 0.9em;
+  }
+
+  .form-input, 
+  .form-textarea {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .form-textarea {
+    min-height: 100px;
+  }
+
+  .form-button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+</style>
