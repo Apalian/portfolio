@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "https://portfolio.lespi.fr/static/css/main.3834f976.css",
+    "main.js": "https://portfolio.lespi.fr/static/js/main.f3ab07f0.js",
+    "static/js/453.1407b060.chunk.js": "https://portfolio.lespi.fr/static/js/453.1407b060.chunk.js",
+    "static/media/background.webp": "https://portfolio.lespi.fr/static/media/background.d3e499ee838d4ea2a36c.webp",
+    "static/media/blindioCover.png": "https://portfolio.lespi.fr/static/media/blindioCover.5b7c7e88f0fa23d6ba65.png",
+    "static/media/cn-flag.svg": "https://portfolio.lespi.fr/static/media/cn-flag.592316d0a0d29074d35413ec5c17792c.svg",
+    "static/media/uk-flag.svg": "https://portfolio.lespi.fr/static/media/uk-flag.9c1cf76a86787c2da4b9fa773eee859a.svg",
+    "index.html": "https://portfolio.lespi.fr/index.html",
+    "static/media/fr-flag.svg": "https://portfolio.lespi.fr/static/media/fr-flag.9d3b64c9553dec68e843e90fe79b34b5.svg",
+    "main.3834f976.css.map": "https://portfolio.lespi.fr/static/css/main.3834f976.css.map",
+    "main.f3ab07f0.js.map": "https://portfolio.lespi.fr/static/js/main.f3ab07f0.js.map",
+    "453.1407b060.chunk.js.map": "https://portfolio.lespi.fr/static/js/453.1407b060.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3834f976.css",
+    "static/js/main.f3ab07f0.js"
+  ]
+}
