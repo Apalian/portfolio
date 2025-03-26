@@ -28,6 +28,11 @@ const projects = {
         href : "http://cultio.lespi.ovh/#/blindio/",
         badges : ["Vue.js", "Node.js", "DockerFile", "SQL"]
     },  
+    S4C01 : {
+        name : "Projet Etudiant PowerBI",
+        src : "./S4C01.svg",
+        badges : ["PowerBI", "PostgreSQL", "SQL"]
+    },  
 }
 
 </script>

@@ -9,10 +9,10 @@
             <slot name="badges"></slot>
           </div>
           <div class="action-icons">
-            <a :href="repository" target="_blank" class="icon-link">
+            <a :href="repository" target="_blank" class="icon-link" v-if="href">
               <img src="/github.svg" alt="Icon 1" class="action-icon" />
             </a>
-            <a :href="href" target="_blank" class="icon-link">
+            <a :href="href" target="_blank" class="icon-link" v-if="repository">
               <img src="/web.svg" alt="Icon 2" class="action-icon" />
             </a>
           </div>
@@ -112,9 +112,8 @@ export default {
   margin-bottom: 10px;
   text-align: center;
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+
 }
 
 .content-row {
