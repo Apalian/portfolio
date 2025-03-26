@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="form-container" id="contact">
     <div class="form-card">
       <h2 class="form-title">{{ Header }}</h2>
       <form class="form" @submit.prevent="submitForm">
