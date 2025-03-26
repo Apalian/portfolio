@@ -98,13 +98,15 @@ const Skill2 = computed(() => translations[language.value]?.['skill-text2']);
 const Skill3 = computed(() => translations[language.value]?.['skill-text3'] );
 const Skill4 = computed(() => translations[language.value]?.['skill-text4']);
 const Skill5 = computed(() => translations[language.value]?.['skill-text5']);
-
-
 </script>
 
 <style scoped>
 .skills-container {
     margin-left: 9em;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .skills-header {
@@ -128,5 +130,74 @@ const Skill5 = computed(() => translations[language.value]?.['skill-text5']);
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1024px) {
+    .skills-container {
+        margin-left: 4em;
+    }
+
+    .skills-content {
+        margin-left: 1em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .skills-container {
+        margin-left: 0;
+        padding: 0 15px;
+    }
+
+    .skills-content {
+        margin-left: 0;
+    }
+
+    .skills-header {
+        text-align: center;
+        font-size: 3em;
+    }
+
+    .skills-section {
+        margin-bottom: 15px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .badge-container {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .skills-container {
+        padding: 0 10px;
+    }
+
+    .skills-section {
+        margin-bottom: 12px;
+    }
+
+    .badge-container {
+        gap: 8px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .skills-container {
+        padding: 0 5px;
+    }
+
+    .skills-section {
+        margin-bottom: 10px;
+    }
+
+    .badge-container {
+        gap: 6px;
+    }
 }
 </style>

@@ -185,159 +185,160 @@ export default {
 }
 </script>
   
-  <style scoped>
-  .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    position: relative;
-  }
-  
-  .form-card {
-    background: var(--primary-color-alt);
-    width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    padding: 30px;
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box;
-  }
-  
-  .form-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  }
-  
-  .form-title {
-    color: var(--secondary-color);
-    font-size: 24px;
-    margin-bottom: 25px;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
-  
-  .form-label {
-    font-size: 1em;
-    font-weight: 500;
-    color: var(--secondary-color);
-    margin-left: 2px;
-  }
-  
-  .form-input, 
-  .form-textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid var(--tertiary-color);
-    border-radius: 8px;
-    font-size: 15px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--primary-color);
-    box-sizing: border-box;
-  }
-  
-  .form-input:focus, 
-  .form-textarea:focus {
-    border-color: var(--tertiary-color-alt);
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-    outline: none;
-  }
-  
-  .form-textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-  
-  .form-button {
-    margin-top: 10px;
-    padding: 14px;
-    background-color: var(--tertiary-color-alt);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
-  }
-  
-  .form-button:hover {
-    background-color: var(--tertiary-color);
-    transform: translateY(-2px);
-  }
-  
-  .form-button:active {
-    transform: translateY(0);
-  }
-  
-  /* Styles pour le toast */
-  .toast {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 4px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .show-toast {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .toast-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-  }
+<style scoped>
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.form-card {
+  background: var(--primary-color-alt);
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+  color: var(--secondary-color);
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin-left: 2px;
+}
+
+.form-input, 
+.form-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--tertiary-color);
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--primary-color);
+  box-sizing: border-box;
+}
+
+.form-input:focus, 
+.form-textarea:focus {
+  border-color: var(--tertiary-color-alt);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  outline: none;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-button {
+  margin-top: 10px;
+  padding: 14px;
+  background-color: var(--tertiary-color-alt);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.form-button:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-2px);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+/* Styles pour le toast */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.show-toast {
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
 
 /* Responsive Breakpoints */
 @media screen and (max-width: 768px) {
   .form-container {
-    padding: 20px 15px;
+    padding: 20px 0;
     max-width: 100%;
   }
 
   .form-card {
     padding: 20px;
     border-radius: 12px;
+    margin: 0 15px;
   }
 
   .form-title {
@@ -365,11 +366,12 @@ export default {
 
 @media screen and (max-width: 480px) {
   .form-container {
-    padding: 15px 10px;
+    padding: 15px 0;
   }
 
   .form-card {
     padding: 15px;
+    margin: 0 10px;
   }
 
   .form-title {

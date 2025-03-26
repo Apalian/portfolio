@@ -60,19 +60,20 @@ const translations = {
     'about-text' : "我十九岁. 目前我在攻读计算机科学的技术学士第二年."
   }
 }
-// Propriétés calculées pour obtenir les traductions
+// Computed properties for translations
 const helloText = computed(() => translations[language.value]?.['hello-text']);
 const jobText = computed(() => translations[language.value]?.['job-text']);
 const locationText = computed(() => translations[language.value]?.['location-text']);
 const aboutText = computed(() => translations[language.value]?.['about-text']);
-
 </script>
 
-<style>
+<style scoped>
 .profile-header {
   display: flex;
   align-items: center;
   margin: 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .profile-header img {
@@ -83,6 +84,7 @@ const aboutText = computed(() => translations[language.value]?.['about-text']);
   will-change: filter;
   transition: filter 300ms;
   margin-right: 1em;
+  margin-bottom: 1em;
 }
 
 .profile-header img:hover {
@@ -91,6 +93,7 @@ const aboutText = computed(() => translations[language.value]?.['about-text']);
 
 .profile-info {
   width: 100%;
+  max-width: 600px;
 }
 
 .profile-content {
@@ -130,6 +133,7 @@ const aboutText = computed(() => translations[language.value]?.['about-text']);
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .links-wrapper {
@@ -153,4 +157,83 @@ p {
   font-size: 1.1em;
 }
 
+/* Responsive Breakpoints */
+@media screen and (max-width: 1024px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-header img {
+    margin-right: 0;
+    margin-bottom: 1.5em;
+  }
+
+  .name-links-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .links-wrapper {
+    margin-left: 0;
+    margin-top: 1em;
+  }
+
+  .profile-content {
+    margin-left: 0;
+    text-align: center;
+    max-width: 100%;
+    padding: 0 1em;
+  }
+
+  .location-badge {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-header img {
+    width: 160px;
+    height: 160px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  .links-wrapper {
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-header img {
+    width: 140px;
+    height: 140px;
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .links-wrapper {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  p {
+    font-size: 1em;
+  }
+}
 </style>
