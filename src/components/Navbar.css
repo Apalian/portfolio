@@ -1,0 +1,44 @@
+/* Navbar.css */
+.navbar {
+    background: rgba(20%, 20%, 20%, 0.5);
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 90px;
+    position: fixed;
+    top: 80px;
+    left: 10px;
+    z-index: 2;
+}
+
+.navbar-logo {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-item {
+    margin: 10px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px;
+    border-radius: 5px; /* Pour les coins arrondis */
+}
+
+.navbar-link:hover {
+    color: #ccc;
+}

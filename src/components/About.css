@@ -1,0 +1,26 @@
+/* About.css */
+
+/* Style pour la section About */
+.about {
+    position: relative; /* Pour que les éléments enfants positionnés absolument se réfèrent à ce conteneur */
+    padding: 50px 20px;
+    text-align: center;
+    overflow: hidden; /* Assure que les formes ne débordent pas */
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative; /* Assure que le contenu reste au-dessus des formes */
+    z-index: 1; /* Assure que le contenu est au-dessus */
+}
+
+.about h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
