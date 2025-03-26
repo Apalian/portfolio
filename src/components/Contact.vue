@@ -1,110 +1,189 @@
 <template>
-    <div class="form-container">
-      <div class="form-card">
-        <h2 class="form-title">Contact Me</h2>
-        <form class="form" @submit.prevent="submitForm">
-          <div class="form-group">
-            <label for="name" class="form-label">Nom</label>
-            <input 
-              type="text" 
-              id="name" 
-              class="form-input" 
-              placeholder="Votre nom"
-              v-model="formData.name"
-              required
-            >
-          </div>
-          
-          <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              class="form-input" 
-              placeholder="Votre email"
-              v-model="formData.email"
-              required
-            >
-          </div>
-          
-          <div class="form-group">
-            <label for="message" class="form-label">Message</label>
-            <textarea 
-              id="message" 
-              class="form-textarea" 
-              rows="4" 
-              placeholder="Votre message"
-              v-model="formData.message"
-              required
-            ></textarea>
-          </div>
-          
-          <button type="submit" class="form-button">Envoyer</button>
-        </form>
-      </div>
-      
-      <div class="toast" :class="{ 'show-toast': showToast }">
-        <span>Ce formulaire ne marche pas encore !</span>
-        <!-- <span>Message envoyé avec succès!</span> -->
-        <button class="toast-close" @click="dismissToast">&times;</button>
-      </div>
+  <div class="form-container">
+    <div class="form-card">
+      <h2 class="form-title">{{ Header }}</h2>
+      <form class="form" @submit.prevent="submitForm">
+        <div class="form-group">
+          <label for="name" class="form-label">{{ Name }}</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="form-input" 
+            :placeholder="YourName"
+            v-model="formData.name"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">{{ Email }}</label>
+          <input 
+            type="email" 
+            id="email" 
+            class="form-input" 
+            :placeholder="YourEmail"
+            v-model="formData.email"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="message" class="form-label">{{ Message }}</label>
+          <textarea 
+            id="message" 
+            class="form-textarea" 
+            rows="4" 
+            :placeholder="YourMessage"
+            v-model="formData.message"
+            required
+          ></textarea>
+        </div>
+        
+        <button type="submit" class="form-button">{{ Send }}</button>
+      </form>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'ContactForm',
-    data() {
-      return {
-        formData: {
+    
+    <div class="toast" :class="{ 'show-toast': showToast }">
+      <span>{{ toastMessage }}</span>
+      <button class="toast-close" @click="dismissToast">&times;</button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ref, computed } from 'vue';
+import { useLanguage } from '../utils/language.js';
+
+export default {
+  name: 'ContactForm',
+  setup() {
+    const { language } = useLanguage();
+
+    const translations = {
+      en: {
+        'header-text': "Contact Me",
+        'name-text': 'Name',
+        'name-text-alt': 'Your name',
+        'email-text': 'Email',
+        'email-text-alt': 'Your email',
+        'message-text': 'Message',
+        'message-text-alt': 'Your message',
+        'send-text': 'Send',
+        'toast-success': 'Message sent successfully!',
+        'toast-error': 'Form submission failed!'
+      },
+      fr: {
+        'header-text': "Me contacter",
+        'name-text': 'Nom',
+        'name-text-alt': 'Votre nom',
+        'email-text': 'Email',
+        'email-text-alt': 'Votre email',
+        'message-text': 'Message',
+        'message-text-alt': 'Votre message',
+        'send-text': 'Envoyer',
+        'toast-success': 'Message envoyé avec succès !',
+        'toast-error': 'Échec de l\'envoi du message !'
+      },
+      zh: {
+        'header-text': "联系我",
+        'name-text': '姓名',
+        'name-text-alt': '您的姓名',
+        'email-text': '邮箱',
+        'email-text-alt': '您的邮箱',
+        'message-text': '留言',
+        'message-text-alt': '您的留言',
+        'send-text': '发送',
+        'toast-success': '消息发送成功！',
+        'toast-error': '消息发送失败！'
+      }
+    };
+
+    const formData = ref({
+      name: '',
+      email: '',
+      message: ''
+    });
+
+    const showToast = ref(false);
+    const toastMessage = ref('');
+    let toastTimeout = null;
+
+    // Computed translations
+    const Header = computed(() => translations[language.value]?.['header-text']);
+    const Name = computed(() => translations[language.value]?.['name-text']);
+    const YourName = computed(() => translations[language.value]?.['name-text-alt']);
+    const Email = computed(() => translations[language.value]?.['email-text']);
+    const YourEmail = computed(() => translations[language.value]?.['email-text-alt']);
+    const Message = computed(() => translations[language.value]?.['message-text']);
+    const YourMessage = computed(() => translations[language.value]?.['message-text-alt']);
+    const Send = computed(() => translations[language.value]?.['send-text']);
+
+    const submitForm = async () => {
+      try {
+        // Simulate form submission (replace with actual API call)
+        console.log('Formulaire soumis:', formData.value);
+        
+        // Clear any existing timeout
+        if (toastTimeout) {
+          clearTimeout(toastTimeout);
+        }
+
+        // Show success toast
+        toastMessage.value = translations[language.value]['toast-success'];
+        showToast.value = true;
+
+        // Reset form
+        formData.value = {
           name: '',
           email: '',
           message: ''
-        },
-        showToast: false,
-        toastTimeout: null
+        };
+
+        // Auto-dismiss toast
+        toastTimeout = setTimeout(() => {
+          showToast.value = false;
+          toastMessage.value = '';
+        }, 3000);
+      } catch (error) {
+        // Handle errors
+        console.error('Form submission error:', error);
+        toastMessage.value = translations[language.value]['toast-error'];
+        showToast.value = true;
+
+        toastTimeout = setTimeout(() => {
+          showToast.value = false;
+          toastMessage.value = '';
+        }, 3000);
       }
-    },
-    methods: {
-      submitForm() {
-        // Logique d'envoi du formulaire
-        console.log('Formulaire soumis:', this.formData);
-        
-        // Simuler un envoi réussi (remplacer par votre logique d'API)
-        setTimeout(() => {
-          // Afficher le toast
-          this.showToast = true;
-          
-          // Effacer tout timeout existant pour éviter des problèmes
-          if (this.toastTimeout) {
-            clearTimeout(this.toastTimeout);
-          }
-          
-          // Réinitialiser le formulaire
-          this.formData = {
-            name: '',
-            email: '',
-            message: ''
-          };
-          
-          // Définir un nouveau timeout
-          this.toastTimeout = setTimeout(() => {
-            this.showToast = false;
-            this.toastTimeout = null;
-          }, 3000);
-        }, 500); // Simule un délai de réseau
-      },
-      
-      dismissToast() {
-        this.showToast = false;
-        if (this.toastTimeout) {
-          clearTimeout(this.toastTimeout);
-          this.toastTimeout = null;
-        }
+    };
+
+    const dismissToast = () => {
+      showToast.value = false;
+      toastMessage.value = '';
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+        toastTimeout = null;
       }
-    }
+    };
+
+    return {
+      formData,
+      showToast,
+      toastMessage,
+      submitForm,
+      dismissToast,
+      Header,
+      Name,
+      YourName,
+      Email,
+      YourEmail,
+      Message,
+      YourMessage,
+      Send
+    };
   }
-  </script>
+}
+</script>
   
   <style scoped>
   .form-container {

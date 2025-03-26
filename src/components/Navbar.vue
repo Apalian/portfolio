@@ -56,10 +56,10 @@ const translations = {
   }
 }
 // Propriétés calculées pour obtenir les traductions
-const Home = computed(() => translations[language.value]?.['home-text'] || 'Texte non disponible');
-const Skills = computed(() => translations[language.value]?.['skills-text'] || 'Texte non disponible');
-const Projects = computed(() => translations[language.value]?.['projects-text'] || 'Localisation non disponible');
-const Contact = computed(() => translations[language.value]?.['contact-text'] || 'À propos non disponible');
+const Home = computed(() => translations[language.value]?.['home-text']);
+const Skills = computed(() => translations[language.value]?.['skills-text']);
+const Projects = computed(() => translations[language.value]?.['projects-text']);
+const Contact = computed(() => translations[language.value]?.['contact-text']);
 
 
   const scrollToSection = (sectionId) => {

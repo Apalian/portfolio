@@ -49,7 +49,7 @@ const translations = {
   },
   fr : {
     'hello-text' : "Bonjour, je suis Lespilette Colin 👋",
-    'job-text' : 'Un <span class="highlight">Étudiant en Data</span>',
+    'job-text' : '<span class="highlight">Étudiant en Data</span>',
     'location-text' : "Toulouse, France",
     'about-text' : "J'ai 19 ans et je suis actuellement en deuxième année de BUT informatique"
   },
@@ -61,10 +61,10 @@ const translations = {
   }
 }
 // Propriétés calculées pour obtenir les traductions
-const helloText = computed(() => translations[language.value]?.['hello-text'] || 'Texte non disponible');
-const jobText = computed(() => translations[language.value]?.['job-text'] || 'Texte non disponible');
-const locationText = computed(() => translations[language.value]?.['location-text'] || 'Localisation non disponible');
-const aboutText = computed(() => translations[language.value]?.['about-text'] || 'À propos non disponible');
+const helloText = computed(() => translations[language.value]?.['hello-text']);
+const jobText = computed(() => translations[language.value]?.['job-text']);
+const locationText = computed(() => translations[language.value]?.['location-text']);
+const aboutText = computed(() => translations[language.value]?.['about-text']);
 
 </script>
 
