@@ -9,10 +9,10 @@
             <slot name="badges"></slot>
           </div>
           <div class="action-icons">
-            <a :href="repository" target="_blank" class="icon-link">
+            <a :href="repository" target="_blank" class="icon-link" v-if="href">
               <img src="/github.svg" alt="Icon 1" class="action-icon" />
             </a>
-            <a :href="href" target="_blank" class="icon-link">
+            <a :href="href" target="_blank" class="icon-link" v-if="repository">
               <img src="/web.svg" alt="Icon 2" class="action-icon" />
             </a>
           </div>
@@ -51,7 +51,8 @@ export default {
 
 <style scoped>
 .project-card {
-  width: 414px;
+  width: 100%;
+  max-width: 414px;
   aspect-ratio: 1/1;
   border-radius: 12px;
   overflow: hidden;
@@ -59,6 +60,12 @@ export default {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .image-container {
@@ -112,9 +119,6 @@ export default {
   margin-bottom: 10px;
   text-align: center;
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .content-row {
@@ -122,7 +126,7 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-
+  width: 100%;
 }
 
 .badges-container {
@@ -131,6 +135,7 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .action-icons {
@@ -155,5 +160,72 @@ export default {
 .action-icon {
   width: 24px;
   height: 24px;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 768px) {
+  .project-card {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .project-name {
+    font-size: 1.8em;
+  }
+
+  .action-icons {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .icon-link,
+  .action-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .project-card {
+    margin-bottom: 10px;
+  }
+
+  .project-name {
+    font-size: 1.5em;
+  }
+
+  .content-row {
+    gap: 8px;
+  }
+
+  .badges-container {
+    gap: 6px;
+  }
+
+  .action-icons {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .icon-link,
+  .action-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .project-name {
+    font-size: 1.3em;
+  }
+
+  .badges-container {
+    gap: 4px;
+  }
+
+  .action-icons {
+    bottom: 8px;
+    right: 8px;
+  }
 }
 </style>
