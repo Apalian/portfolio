@@ -1,5 +1,5 @@
 <template>
-  <section ref="heroRef" :class="heroClasses">
+  <section ref="heroRef" class="relative w-full transition-all duration-500 ease-in-out h-screen">
     <!-- Background gradient animé -->
     <div
       class="absolute inset-0 bg-linear-to-tr from-kelly-green via-dark-lemon to-acid-green"
@@ -8,18 +8,17 @@
     <!-- Contenu principal -->
     <div class="relative z-10 flex items-center justify-center h-full">
       <div class="text-center font-poppins text-white">
-        <h1 ref="titleRef" :class="titleClasses">
+        <h1 ref="titleRef" class="font-bold transition-all duration-500 text-6xl md:text-7xl">
           {{ displayedText }}<span class="cursor font-medium">_</span>
         </h1>
-        <p :class="subtitleClasses">Data Scientist</p>
+        <p class="font-light opacity-90 mt-4 transition-all duration-500 text-2xl md:text-3xl">
+          Data Scientist Student
+        </p>
       </div>
     </div>
 
     <!-- Scroll indicator -->
-    <div
-      v-show="!isScrolled"
-      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-    >
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
@@ -33,48 +32,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 
 // Refs
 const heroRef = ref<HTMLElement>()
 const titleRef = ref<HTMLElement>()
 
-// State
-const isScrolled = ref(false)
-const scrollY = ref(0)
 const displayedText = ref('')
 
-// Computed
-const heroClasses = computed(() => [
-  'relative w-full transition-all duration-500 ease-in-out',
-  isScrolled.value ? 'h-[20vh]' : 'h-screen',
-])
-
-const titleClasses = computed(() => [
-  'font-bold transition-all duration-500',
-  isScrolled.value ? 'text-3xl md:text-4xl' : 'text-6xl md:text-7xl',
-])
-
-const subtitleClasses = computed(() => [
-  'font-light opacity-90 mt-4 transition-all duration-500',
-  isScrolled.value ? 'text-lg md:text-xl' : 'text-2xl md:text-3xl',
-])
-
 // Methods
-const handleScroll = () => {
-  scrollY.value = window.scrollY
-  if (!isScrolled.value && scrollY.value > 100) {
-    isScrolled.value = true
-  } else if (isScrolled.value && scrollY.value == 0) {
-    // Retour en haut
-  }
-}
-
-const handleWheel = (event: WheelEvent) => {
-  console.log('Wheel event:', event.deltaY, 'ScrollY:', scrollY.value)
-}
-
 const startTypewriter = () => {
   const text = 'Colin Lespilette'
   displayedText.value = ''
@@ -96,13 +63,6 @@ const startTypewriter = () => {
 // Lifecycle
 onMounted(() => {
   startTypewriter()
-  window.addEventListener('scroll', handleScroll)
-  window.removeEventListener('wheel', handleWheel)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('wheel', handleWheel)
 })
 </script>
 

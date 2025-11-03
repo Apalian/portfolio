@@ -1,8 +1,29 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-kelly-green: #49A115;
-  --color-dark-lemon: #94B911;
-  --color-acid-green: #B4C50C;
+  --color-kelly-green: #49a115;
+  --color-dark-lemon: #94b911;
+  --color-acid-green: #b4c50c;
   --font-poppins: Poppins, sans-serif;
+}
+
+.skill-item {
+  @apply text-gray-600 py-1 px-3 rounded hover:bg-gray-50 transition-colors duration-200;
+}
+
+.animated-background {
+  -webkit-animation: animation 3s ease infinite;
+  -moz-animation: animation 3s ease infinite;
+  animation: animation 3s ease infinite;
+}
+
+@keyframes animation {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
