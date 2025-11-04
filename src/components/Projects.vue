@@ -78,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, type ComponentPublicInstance } from 'vue'
 import { gsap } from 'gsap'
 
 // Refs
@@ -91,9 +91,10 @@ const showAll = ref(false)
 let observer: IntersectionObserver
 
 // Fonction pour définir les refs des projets
-const setProjectRef = (el: HTMLElement | null, index: number) => {
+const setProjectRef = (el: Element | ComponentPublicInstance | null | null, index: number) => {
   if (el) {
-    projectRefs.value[index] = el
+    const htmlElement = (el as ComponentPublicInstance)?.$el || (el as HTMLElement)
+    projectRefs.value[index] = htmlElement
   }
 }
 

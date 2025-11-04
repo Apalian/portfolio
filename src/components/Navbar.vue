@@ -119,6 +119,7 @@ const handleNavClick = (sectionId: string, event: Event) => {
   )
 
   const targetElement = document.getElementById(sectionId)
+  if (!targetElement) return
 
   gsap.to(window, {
     duration: 1.5,
