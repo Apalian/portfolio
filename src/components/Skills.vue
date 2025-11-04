@@ -1,5 +1,5 @@
 <template>
-  <section class="h-screen bg-gray-50 py-20">
+  <section id="skills" class="h-screen bg-gray-50 py-20">
     <div class="max-w-6xl mx-auto px-6">
       <!-- Header -->
       <div ref="headerRef" class="text-center mb-16 opacity-0">

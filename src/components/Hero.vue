@@ -1,5 +1,5 @@
 <template>
-  <section ref="heroRef" class="relative w-full transition-all duration-500 ease-in-out h-screen">
+  <section id="hero" ref="heroRef" class="relative w-full transition-all duration-500 ease-in-out h-screen">
     <!-- Background gradient animé -->
     <div
       class="absolute inset-0 bg-linear-to-tr from-kelly-green via-dark-lemon to-acid-green"

@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen bg-white py-20">
+  <section id="education" class="min-h-screen bg-white py-20">
     <div class="max-w-4xl mx-auto px-6">
       <!-- Header -->
       <div ref="headerRef" class="text-center mb-16 opacity-0">
