@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white overflow-hidden">
+  <section id="skills" class="min-h-screen bg-white overflow-hidden">
     <div class="hexagon-grid" ref="hexagonGridRef">
       <div
         v-for="row in rows"
@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
