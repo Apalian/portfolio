@@ -3,7 +3,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <!-- Header -->
       <div ref="headerRef" class="text-center mb-16 opacity-0">
-        <h2 class="text-5xl font-bold text-gray-800 mb-4">À propos</h2>
+        <h2 class="text-5xl font-bold text-gray-800 mb-4">{{ t('about.title') }}</h2>
         <div
           class="w-24 h-1 bg-linear-to-r from-kelly-green via-dark-lemon to-acid-green mx-auto animated-background"
         ></div>
@@ -27,30 +27,26 @@
 
           <!-- Info rapide -->
           <div ref="infoRef" class="space-y-2 text-lg text-gray-600">
-            <p class="opacity-0"><span class="font-semibold">Localisation:</span> Paris, France</p>
-            <p class="opacity-0"><span class="font-semibold">Formation:</span> Bac +3</p>
+            <p class="opacity-0"><span class="font-semibold">{{ t('about.location') }}:</span> {{ t('about.locationValue') }}</p>
+            <p class="opacity-0"><span class="font-semibold">{{ t('about.education') }}:</span> {{ t('about.educationValue') }}</p>
             <p class="opacity-0">
-              <span class="font-semibold">Spécialité:</span> Data & Machine Learning
+              <span class="font-semibold">{{ t('about.specialty') }}:</span> {{ t('about.specialtyValue') }}
             </p>
           </div>
         </div>
 
         <!-- Texte description -->
         <div ref="textRef" class="space-y-6">
-          <p class="text-xl text-gray-700 leading-relaxed opacity-0">
-            Passionné par l'analyse de données depuis X années, je transforme les données complexes
-            en insights actionnables qui guident les décisions stratégiques.
+          <p class="text-lg text-gray-700 leading-relaxed opacity-0">
+            {{ t('about.description.p1') }}
           </p>
 
-          <p class="text-lg text-gray-600 leading-relaxed opacity-0">
-            Mon parcours m'a mené de l'université à des projets concrets dans des secteurs variés :
-            finance, santé, e-commerce. J'adore résoudre des problèmes complexes avec des
-            algorithmes élégants.
+          <p class="text-lg text-gray-700 leading-relaxed opacity-0">
+            {{ t('about.description.p2') }}
           </p>
 
-          <p class="text-lg text-gray-600 leading-relaxed opacity-0">
-            Quand je ne code pas, vous me trouverez probablement en train de lire les derniers
-            papers de recherche, ou d'explorer de nouveaux frameworks ML.
+          <p class="text-lg text-gray-700 leading-relaxed opacity-0">
+            {{ t('about.description.p3') }}
           </p>
         </div>
       </div>
@@ -61,8 +57,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
-// Refs pour les éléments à animer
+// Refs
 const headerRef = ref<HTMLElement>()
 const photoRef = ref<HTMLElement>()
 const infoRef = ref<HTMLElement>()
@@ -70,7 +68,6 @@ const textRef = ref<HTMLElement>()
 
 let observer: IntersectionObserver
 
-// Animations GSAP
 const animateHeader = (element: Element) => {
   gsap.fromTo(
     element,

@@ -3,7 +3,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <!-- Header -->
       <div ref="headerRef" class="text-center mb-16 opacity-0">
-        <h2 class="text-5xl font-bold text-gray-800 mb-4">Projets</h2>
+        <h2 class="text-5xl font-bold text-gray-800 mb-4">{{ t('projects.title') }}</h2>
         <div
           class="w-24 h-1 bg-linear-to-r from-kelly-green via-dark-lemon to-acid-green mx-auto"
         ></div>
@@ -17,27 +17,38 @@
           :ref="(el) => setProjectRef(el, index)"
           class="project-card opacity-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
         >
-          <div :class="['relative h-48 overflow-hidden', project.gradient]">
+          <!-- Image du projet -->
+          <div class="relative h-48 overflow-hidden bg-gray-100">
+            <img
+              :src="project.image"
+              :alt="project.title"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+
+            <!-- Overlay au hover avec boutons -->
             <div
-              class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"
-            ></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="text-white text-4xl">{{ project.icon }}</div>
-            </div>
-            <div
-              class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
             >
               <div class="flex space-x-4">
-                <button
-                  class="px-4 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors"
+                <a
+                  v-if="project.github"
+                  :href="project.github"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-4 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors font-medium"
                 >
+
                   GitHub
-                </button>
-                <button
-                  class="px-4 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors"
+                </a>
+                <a
+                  v-if="project.demo"
+                  :href="project.demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-4 py-2 bg-kelly-green text-white rounded-lg hover:bg-kelly-green/90 transition-colors font-medium"
                 >
-                  Demo
-                </button>
+                  {{ t('projects.viewDemo') }}
+                </a>
               </div>
             </div>
           </div>
@@ -50,27 +61,22 @@
               <span
                 v-for="tech in project.technologies"
                 :key="tech"
-                :class="['px-3 py-1 rounded-full text-xs', project.techClass]"
+                class="px-3 py-1 bg-kelly-green/10 text-kelly-green rounded-full text-xs"
               >
                 {{ tech }}
               </span>
-            </div>
-
-            <div class="flex justify-between text-sm text-gray-500">
-              <span>{{ project.stat1 }}</span>
-              <span>{{ project.stat2 }}</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Bouton Voir plus / Voir moins -->
-      <div class="text-center mt-12">
+      <div v-if="projects.length > 6" class="text-center mt-12">
         <button
           @click="toggleShowAll"
           class="px-8 py-3 bg-kelly-green text-white rounded-lg hover:bg-kelly-green/90 transition-colors font-medium"
         >
-          {{ showAll ? 'Voir moins' : `Voir plus (${projects.length - 6} autres projets)` }}
+          {{ showAll ? t('projects.showLess') : t('projects.showMore', { count: projects.length - 6 }) }}
         </button>
       </div>
     </div>
@@ -80,6 +86,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick, type ComponentPublicInstance } from 'vue'
 import { gsap } from 'gsap'
+import { useI18n } from 'vue-i18n'
+import blindioCover from '@/assets/images/blindioCover.svg'
+import mnistCover from '@/assets/images/mnistCover.webp'
+import snakeCover from '@/assets/images/snakeCover.png'
+
+const { t } = useI18n()
 
 // Refs
 const headerRef = ref<HTMLElement>()
@@ -91,134 +103,53 @@ const showAll = ref(false)
 let observer: IntersectionObserver
 
 // Fonction pour définir les refs des projets
-const setProjectRef = (el: Element | ComponentPublicInstance | null | null, index: number) => {
+const setProjectRef = (el: Element | ComponentPublicInstance | null, index: number) => {
   if (el) {
     const htmlElement = (el as ComponentPublicInstance)?.$el || (el as HTMLElement)
     projectRefs.value[index] = htmlElement
   }
 }
 
-// Tous vos projets (même structure qu'avant)
 const projects = ref([
   {
     id: 1,
-    title: 'Analyse des Ventes E-commerce',
-    description:
-      'Prédiction des ventes et analyse des tendances pour une boutique en ligne avec +100k transactions.',
-    icon: '📊',
-    gradient: 'bg-gradient-to-r from-kelly-green to-dark-lemon',
-    technologies: ['Python', 'Pandas', 'Scikit-learn'],
-    techClass: 'bg-kelly-green/10 text-kelly-green',
-    stat1: '📈 +25% précision',
-    stat2: '⭐ Featured',
+    title: 'Blindio',
+    description: "Design et développement d'une application de blindtests générés aléatoirement. Blindio est une application permettant de customiser ses blindtests selon un ensemble de paramètres et facilement modulable par le biais de l'API Youtube.",
+    image: blindioCover,
+    technologies: ['Web', 'Vue.js', 'API'],
+    github: '',
+    demo: 'http://51.75.194.39:8080/#/blindio'
   },
   {
     id: 2,
-    title: 'Chatbot Intelligence Artificielle',
-    description:
-      'Assistant conversationnel utilisant le NLP pour répondre aux questions clients automatiquement.',
-    icon: '🤖',
-    gradient: 'bg-gradient-to-r from-dark-lemon to-acid-green',
-    technologies: ['TensorFlow', 'NLTK', 'Flask'],
-    techClass: 'bg-dark-lemon/10 text-dark-lemon',
-    stat1: '💬 1000+ conversations',
-    stat2: '🏆 Award',
+    title: 'MNIST Digit Recognizer',
+    description: "L'objectif de ce projet était de m'introduire a l'apprentissage automatique via Tensorflow en utilisant des réseaux de neurones pour reconnaître des chiffres manuscrits à partir du célèbre jeu de données MNIST. J'ai également pu faire mon propre algorithme en utilisant uniquement Numpy.",
+    image: mnistCover,
+    technologies: [ 'AI', 'Tensorflow','Numpy'],
+    github: '',
+    demo: ''
   },
   {
-    id: 3,
-    title: 'Dashboard Analytics Temps Réel',
-    description: 'Tableau de bord interactif pour visualiser les métriques business en temps réel.',
-    icon: '📈',
-    gradient: 'bg-gradient-to-r from-acid-green to-kelly-green',
-    technologies: ['Vue.js', 'D3.js', 'WebSocket'],
-    techClass: 'bg-acid-green/10 text-acid-green',
-    stat1: '⚡ Real-time',
-    stat2: '👥 Team project',
-  },
-  {
-    id: 4,
-    title: 'Système de Recommandation',
-    description: 'Algorithme de recommandation personnalisée basé sur le collaborative filtering.',
-    icon: '🎯',
-    gradient: 'bg-gradient-to-r from-purple-500 to-pink-500',
-    technologies: ['Python', 'Surprise', 'MongoDB'],
-    techClass: 'bg-purple-100 text-purple-700',
-    stat1: '🔥 +40% engagement',
-    stat2: '⭐ Popular',
-  },
-  {
-    id: 5,
-    title: 'Détection de Fraude',
-    description:
-      'Modèle de machine learning pour détecter les transactions frauduleuses en temps réel.',
-    icon: '🛡️',
-    gradient: 'bg-gradient-to-r from-red-500 to-orange-500',
-    technologies: ['Scikit-learn', 'XGBoost', 'Kafka'],
-    techClass: 'bg-red-100 text-red-700',
-    stat1: '🎯 98% précision',
-    stat2: '⚡ Real-time',
-  },
-  {
-    id: 6,
-    title: 'API de Prédiction Météo',
-    description:
-      'API REST pour prédire les conditions météorologiques avec apprentissage automatique.',
-    icon: '🌤️',
-    gradient: 'bg-gradient-to-r from-blue-400 to-cyan-400',
-    technologies: ['FastAPI', 'TensorFlow', 'Docker'],
-    techClass: 'bg-blue-100 text-blue-700',
-    stat1: '📡 1M+ requêtes',
-    stat2: '☁️ Cloud',
-  },
-  {
-    id: 7,
-    title: 'Analyseur de Sentiment Social',
-    description:
-      "Outil d'analyse des sentiments sur les réseaux sociaux pour le monitoring de marque.",
-    icon: '😊',
-    gradient: 'bg-gradient-to-r from-indigo-500 to-purple-600',
-    technologies: ['BERT', 'Streamlit', 'Twitter API'],
-    techClass: 'bg-indigo-100 text-indigo-700',
-    stat1: '📱 Social media',
-    stat2: '🔍 NLP',
-  },
-  {
-    id: 8,
-    title: 'Optimisation de Portfolio',
-    description: "Algorithme d'optimisation pour la gestion de portefeuilles d'investissement.",
-    icon: '💰',
-    gradient: 'bg-gradient-to-r from-green-500 to-emerald-500',
-    technologies: ['R', 'Shiny', 'QuantLib'],
-    techClass: 'bg-emerald-100 text-emerald-700',
-    stat1: '💹 Finance',
-    stat2: '📊 Quant',
-  },
-  {
-    id: 9,
-    title: "Reconnaissance d'Images Médicales",
-    description: "CNN pour l'analyse automatique d'images radiologiques et détection d'anomalies.",
-    icon: '🏥',
-    gradient: 'bg-gradient-to-r from-teal-500 to-green-500',
-    technologies: ['PyTorch', 'OpenCV', 'DICOM'],
-    techClass: 'bg-teal-100 text-teal-700',
-    stat1: '🩺 Medical AI',
-    stat2: '🎖️ Research',
+    id: 2,
+    title: 'Snake Game AI',
+    description: "Après avpoir exploré les bases de l'apprentissage automatique avec le projet MNIST, j'ai décidé de pousser mes compétences plus loin en développant une IA capable de jouer au jeu du Snake. En utilisant des techniques de Deep Reinforcement Learning, j'ai entraîné un modèle à maximiser son score en apprenant à naviguer dans l'environnement du jeu.",
+    image: snakeCover,
+    technologies: [ 'AI', 'Tensorflow','Numpy'],
+    github: '',
+    demo: ''
   },
 ])
 
-// Computed pour afficher soit 6 projets, soit tous
 const displayedProjects = computed(() => {
   return showAll.value ? projects.value : projects.value.slice(0, 6)
 })
 
-// Animation en cascade : 1 → 2, 4 → 3, 5 → 6
 const getCascadeDelay = (index: number) => {
-  const cascadeOrder = [0, 1, 3, 2, 4, 5] // Ordre d'apparition
+  const cascadeOrder = [0, 1, 3, 2, 4, 5]
   const position = cascadeOrder.indexOf(index % 6)
   return position !== -1 ? position * 0.2 : index * 0.1
 }
 
-// Animation des projets
 const animateProjects = () => {
   projectRefs.value.forEach((el, index) => {
     if (el) {
@@ -239,7 +170,6 @@ const animateProjects = () => {
   })
 }
 
-// Animation du header
 const animateHeader = (element: Element) => {
   gsap.fromTo(
     element,
@@ -248,16 +178,12 @@ const animateHeader = (element: Element) => {
   )
 }
 
-// Méthode pour basculer l'affichage
 const toggleShowAll = async () => {
   showAll.value = !showAll.value
 
-  // Attendre le prochain tick pour que les éléments soient rendus
   await nextTick()
 
-  // Réinitialiser les refs et animer les nouveaux projets
   if (showAll.value) {
-    // Animation uniquement pour les nouveaux projets (index 6+)
     const newProjects = projectRefs.value.slice(6)
     newProjects.forEach((el, index) => {
       if (el) {

@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "education": "Education",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Data Science Student"
+  },
+  "about": {
+    "title": "About",
+    "location": "Location",
+    "locationValue": "Toulouse, France",
+    "education": "Education",
+    "educationValue": "Bachelor's Degree +3",
+    "specialty": "Specialty",
+    "specialtyValue": "Data & Machine Learning",
+    "description": {
+      "p1": "Passionate about machine learning and artificial intelligence, I am always looking for new ways to leverage data to solve real-world problems.",
+      "p2": "Through my academic and personal projects, I have developed strong skills in Python, TensorFlow, and SQL, as well as a deep understanding of machine learning algorithms.",
+      "p3": "I am enthusiastic about collaborating on innovative projects that push the boundaries of technology and bring real added value."
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "categories": {
+      "programming": "Programming Languages",
+      "ml": "Machine Learning",
+      "visualization": "Visualization"
+    }
+  },
+  "education": {
+    "title": "Education",
+    "items": [
+      {
+        "period": "2025 - 2026",
+        "degree": "Bachelor's Degree in Computer Science: Data Administration and Management",
+        "institution": "IUT, University of Toulouse",
+        "description": "Advanced learning of Artificial Intelligence and Machine Learning techniques",
+        "skills": ["Python", "TensorFlow", "SQL"]
+      },
+      {
+        "period": "2023 - 2025",
+        "degree": "Technical Degree in Computer Science: Data Administration and Management",
+        "institution": "IUT, University of Toulouse",
+        "description": "Advanced learning of Artificial Intelligence and Machine Learning techniques",
+        "skills": ["Java", "SQL", "AGILE Methods"]
+      },
+      {
+        "period": "2020 - 2023",
+        "degree": "High School Diploma - Mathematics and Computer Science",
+        "institution": "Jean Baptiste De Baudre High School",
+        "description": "Programming basics and web development. First team projects.",
+        "skills": ["HTML/CSS", "JavaScript", "PHP"]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "viewDemo": "Demo",
+    "showMore": "Show more ({count} more projects)",
+    "showLess": "Show less"
+  }
+}

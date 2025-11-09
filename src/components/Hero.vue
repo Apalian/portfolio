@@ -6,19 +6,23 @@
     ></div>
 
     <!-- Contenu principal -->
-    <div class="relative z-10 flex items-center justify-center h-full">
+    <div class="relative flex items-center justify-center h-full">
       <div class="text-center font-poppins text-white">
         <h1 ref="titleRef" class="font-bold transition-all duration-500 text-6xl md:text-7xl">
           {{ displayedText }}<span class="cursor font-medium">_</span>
         </h1>
         <p class="font-light opacity-90 mt-4 transition-all duration-500 text-2xl md:text-3xl">
-          Data Scientist Student
+          {{ t('hero.subtitle') }}
         </p>
       </div>
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <div
+      ref="scrollRef"
+      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+      @click="scrollToNext"
+    >
       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
@@ -34,10 +38,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { useI18n } from 'vue-i18n'
+
+// Enregistrer le plugin ScrollToPlugin
+gsap.registerPlugin(ScrollToPlugin)
+
+const { t } = useI18n()
 
 // Refs
 const heroRef = ref<HTMLElement>()
 const titleRef = ref<HTMLElement>()
+const scrollRef = ref<HTMLElement>()
 
 const displayedText = ref('')
 
@@ -58,6 +70,25 @@ const startTypewriter = () => {
       },
     }
   )
+}
+
+const scrollToNext = () => {
+  console.log("Scrolling to next section")
+  const targetElement = document.getElementById("about")
+
+  if (!targetElement) {
+    console.error("Target element 'about' not found")
+    return
+  }
+
+  gsap.to(window, {
+    duration: 1.5,
+    scrollTo: {
+      y: targetElement,
+      offsetY: 0
+    },
+    ease: "power2.inOut"
+  })
 }
 
 // Lifecycle
