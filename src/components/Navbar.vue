@@ -9,17 +9,19 @@
         ref="navbarRef"
         class="relative bg-white/95 backdrop-blur-lg border border-white/30 rounded-2xl px-8 py-4 shadow-lg pointer-events-auto"
       >
+        <!-- Desktop Menu -->
         <div class="hidden md:flex justify-between items-center">
-          <div class="flex gap-8 flex-1 justify-center">
+          <div class="flex gap-2 flex-1 justify-center">
             <a
               v-for="(item, index) in menuItems"
               :key="item.id"
               :href="item.href"
               ref="menuLinksRef"
               :class="[
-                'relative py-3 px-5 text-gray-600 no-underline font-medium rounded-lg transition-colors hover:text-kelly-green',
+                'relative py-3 px-5 text-gray-600 no-underline font-medium rounded-lg transition-colors hover:text-kelly-green inline-block',
                 { 'text-kelly-green': activeSection === item.id }
               ]"
+              :style="{ minWidth: '100px', textAlign: 'center' }"
               @click="handleNavClick(item.id, $event)"
               @mouseenter="animateHover(index, true)"
               @mouseleave="animateHover(index, false)"
@@ -30,15 +32,54 @@
                 class="absolute bottom-1 left-5 right-5 h-0.5 bg-linear-to-r from-kelly-green to-dark-lemon rounded-sm"
               ></div>
             </a>
-            <!-- Language Switcher avec slider -->
+          </div>
+
+          <!-- Language Switcher -->
+          <div class="relative flex bg-gray-100 rounded-lg p-1 ml-4">
+            <!-- Background slider -->
+            <div
+              class="absolute inset-y-1 left-1 w-10 bg-linear-to-r from-kelly-green to-dark-lemon rounded-md transition-transform duration-300 ease-out"
+              :style="{ transform: locale === 'fr' ? 'translateX(0)' : 'translateX(100%)' }"
+            ></div>
+
+            <!-- Boutons -->
+            <button
+              @click="changeLocale('fr')"
+              :class="[
+                'relative z-10 px-3 py-2 rounded-md transition-colors duration-300',
+                locale === 'fr' ? 'text-white' : 'text-gray-600'
+              ]"
+              title="Français"
+            >
+              <span class="text-xl">🇫🇷</span>
+            </button>
+
+            <button
+              @click="changeLocale('en')"
+              :class="[
+                'relative z-10 px-3 py-2 rounded-md transition-colors duration-300',
+                locale === 'en' ? 'text-white' : 'text-gray-600'
+              ]"
+              title="English"
+            >
+              <span class="text-xl">🇬🇧</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="flex md:hidden justify-between items-center">
+          <!-- Logo ou Titre -->
+          <div class="text-xl font-bold text-gray-800">Colin Lespilette</div>
+
+          <div class="flex items-center gap-4">
+            <!-- Language Switcher Mobile -->
             <div class="relative flex bg-gray-100 rounded-lg p-1">
-              <!-- Background slider -->
               <div
                 class="absolute inset-y-1 left-1 w-10 bg-linear-to-r from-kelly-green to-dark-lemon rounded-md transition-transform duration-300 ease-out"
                 :style="{ transform: locale === 'fr' ? 'translateX(0)' : 'translateX(100%)' }"
               ></div>
 
-              <!-- Boutons -->
               <button
                 @click="changeLocale('fr')"
                 :class="[
@@ -61,8 +102,64 @@
                 <span class="text-xl">🇬🇧</span>
               </button>
             </div>
+
+            <!-- Burger Button -->
+            <button
+              @click="toggleMobileMenu"
+              class="relative w-10 h-10 flex flex-col justify-center items-center gap-1.5 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <span
+                :class="[
+                  'block w-6 h-0.5 bg-gray-800 transition-all duration-300',
+                  { 'rotate-45 translate-y-2': isMobileMenuOpen }
+                ]"
+              ></span>
+              <span
+                :class="[
+                  'block w-6 h-0.5 bg-gray-800 transition-all duration-300',
+                  { 'opacity-0': isMobileMenuOpen }
+                ]"
+              ></span>
+              <span
+                :class="[
+                  'block w-6 h-0.5 bg-gray-800 transition-all duration-300',
+                  { '-rotate-45 -translate-y-2': isMobileMenuOpen }
+                ]"
+              ></span>
+            </button>
           </div>
         </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <transition
+          enter-active-class="transition ease-out duration-200"
+          enter-from-class="opacity-0 -translate-y-4"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition ease-in duration-150"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 -translate-y-4"
+        >
+          <div
+            v-if="isMobileMenuOpen"
+            class="md:hidden mt-4 pt-4 border-t border-gray-200"
+          >
+            <div class="flex flex-col space-y-2">
+              <a
+                v-for="item in menuItems"
+                :key="item.id"
+                :href="item.href"
+                :class="[
+                  'py-3 px-4 text-gray-600 no-underline font-medium rounded-lg transition-colors hover:bg-gray-100 hover:text-kelly-green',
+                  { 'text-kelly-green bg-gray-50': activeSection === item.id }
+                ]"
+                @click="handleMobileNavClick(item.id, $event)"
+              >
+                {{ t(item.labelKey) }}
+              </a>
+            </div>
+          </div>
+        </transition>
       </nav>
     </div>
   </div>
@@ -83,6 +180,7 @@ gsap.registerPlugin(ScrollToPlugin)
 const navbarRef = ref<HTMLElement>()
 const menuLinksRef = ref<HTMLElement[]>([])
 const navbarContainer = ref<HTMLElement>()
+const isMobileMenuOpen = ref(false)
 
 let lastScrollY = 0
 let isNavbarVisible = ref(true)
@@ -97,6 +195,11 @@ const menuItems = [
   { id: 'projects', labelKey: 'nav.projects', href: '#projects' },
   { id: 'contact', labelKey: 'nav.contact', href: '#contact' }
 ]
+
+// Toggle mobile menu
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
 
 // Animations d'entrée
 const animateNavbarEntrance = () => {
@@ -175,12 +278,31 @@ const handleNavClick = (sectionId: string, event: Event) => {
   })
 }
 
+const handleMobileNavClick = (sectionId: string, event: Event) => {
+  event.preventDefault()
+
+  activeSection.value = sectionId
+  isMobileMenuOpen.value = false // Fermer le menu mobile
+
+  const targetElement = document.getElementById(sectionId)
+  if (!targetElement) return
+
+  gsap.to(window, {
+    duration: 1.5,
+    scrollTo: targetElement,
+    ease: "power2.inOut"
+  })
+}
 
 const handleScroll = () => {
   if (!navbarContainer.value || !navbarRef.value) return
 
   const scrollY = window.scrollY
   const scrollDirection = scrollY > lastScrollY ? 'down' : 'up'
+
+  if (isMobileMenuOpen.value) {
+    isMobileMenuOpen.value = false
+  }
 
   // Animation de disparition/apparition
   if (scrollY > 100) {
@@ -256,7 +378,6 @@ const setupSectionObserver = () => {
     }
   })
 }
-
 
 onMounted(() => {
   setTimeout(() => {

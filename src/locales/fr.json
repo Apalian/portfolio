@@ -62,6 +62,57 @@
     "title": "Projets",
     "viewDemo": "Démo",
     "showMore": "Voir plus ({count} autres projets)",
-    "showLess": "Voir moins"
+    "showLess": "Voir moins",
+    "items": [
+      {
+        "id": 1,
+        "title": "Blindio",
+        "description": "Design et développement d'une application de blindtests générés aléatoirement. Blindio est une application permettant de customiser ses blindtests selon un ensemble de paramètres et facilement modulable par le biais de l'API Youtube.",
+        "technologies": ["Web", "Vue.js", "API"],
+        "github": "",
+        "demo": "http://51.75.194.39:8080/#/blindio"
+      },
+      {
+        "id": 2,
+        "title": "MNIST Digit Recognizer",
+        "description": "L'objectif de ce projet était de m'introduire a l'apprentissage automatique via Tensorflow en utilisant des réseaux de neurones pour reconnaître des chiffres manuscrits à partir du célèbre jeu de données MNIST. J'ai également pu faire mon propre algorithme en utilisant uniquement Numpy.",
+        "technologies": ["AI", "TensorFlow", "NumPy"],
+        "github": "",
+        "demo": ""
+      },
+      {
+        "id": 3,
+        "title": "Snake Game AI",
+        "description": "Après avoir exploré les bases de l'apprentissage automatique avec le projet MNIST, j'ai décidé de pousser mes compétences plus loin en développant une IA capable de jouer au jeu du Snake. En utilisant des techniques de Deep Reinforcement Learning, j'ai entraîné un modèle à maximiser son score en apprenant à naviguer dans l'environnement du jeu.",
+        "technologies": ["AI", "TensorFlow", "NumPy"],
+        "github": "",
+        "demo": ""
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "subtitle": "Discutons de votre prochain projet",
+    "location": "Localisation",
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre.email{'@'}exemple.com",
+      "subject": "Sujet",
+      "subjectPlaceholder": "Sujet de votre message",
+      "message": "Message",
+      "messagePlaceholder": "Votre message...",
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès ! Je vous répondrai bientôt.",
+      "error": "Erreur lors de l'envoi du message. Veuillez réessayer."
+    }
+  },
+  "footer": {
+    "description": "Étudiant en Data Science passionné par l'IA et le Machine Learning. Toujours à la recherche de nouveaux défis et d'opportunités d'apprentissage.",
+    "quickLinks": "Liens Rapides",
+    "followMe": "Suivez-moi",
+    "rights": "Tous droits réservés."
   }
 }

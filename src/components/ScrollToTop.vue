@@ -76,7 +76,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  sections: () => ['hero', 'about', 'education', 'skills', 'projects']
+  sections: () => ['hero', 'about', 'education', 'skills', 'projects', 'contact']
 })
 
 // Refs

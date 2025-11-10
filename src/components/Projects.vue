@@ -91,7 +91,18 @@ import blindioCover from '@/assets/images/blindioCover.svg'
 import mnistCover from '@/assets/images/mnistCover.webp'
 import snakeCover from '@/assets/images/snakeCover.png'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
+
+// Interface pour typer les projets
+interface Project {
+  id: number
+  title: string
+  description: string
+  technologies: string[]
+  github: string
+  demo: string
+  image?: string
+}
 
 // Refs
 const headerRef = ref<HTMLElement>()
@@ -110,35 +121,21 @@ const setProjectRef = (el: Element | ComponentPublicInstance | null, index: numb
   }
 }
 
-const projects = ref([
-  {
-    id: 1,
-    title: 'Blindio',
-    description: "Design et développement d'une application de blindtests générés aléatoirement. Blindio est une application permettant de customiser ses blindtests selon un ensemble de paramètres et facilement modulable par le biais de l'API Youtube.",
-    image: blindioCover,
-    technologies: ['Web', 'Vue.js', 'API'],
-    github: '',
-    demo: 'http://51.75.194.39:8080/#/blindio'
-  },
-  {
-    id: 2,
-    title: 'MNIST Digit Recognizer',
-    description: "L'objectif de ce projet était de m'introduire a l'apprentissage automatique via Tensorflow en utilisant des réseaux de neurones pour reconnaître des chiffres manuscrits à partir du célèbre jeu de données MNIST. J'ai également pu faire mon propre algorithme en utilisant uniquement Numpy.",
-    image: mnistCover,
-    technologies: [ 'AI', 'Tensorflow','Numpy'],
-    github: '',
-    demo: ''
-  },
-  {
-    id: 2,
-    title: 'Snake Game AI',
-    description: "Après avpoir exploré les bases de l'apprentissage automatique avec le projet MNIST, j'ai décidé de pousser mes compétences plus loin en développant une IA capable de jouer au jeu du Snake. En utilisant des techniques de Deep Reinforcement Learning, j'ai entraîné un modèle à maximiser son score en apprenant à naviguer dans l'environnement du jeu.",
-    image: snakeCover,
-    technologies: [ 'AI', 'Tensorflow','Numpy'],
-    github: '',
-    demo: ''
-  },
-])
+// Images mapping
+const projectImages: Record<number, string> = {
+  1: blindioCover,
+  2: mnistCover,
+  3: snakeCover
+}
+
+// Computed projects avec traductions
+const projects = computed(() => {
+  const projectsData = tm('projects.items') as Project[]
+  return projectsData.map(project => ({
+    ...project,
+    image: projectImages[project.id] || blindioCover
+  }))
+})
 
 const displayedProjects = computed(() => {
   return showAll.value ? projects.value : projects.value.slice(0, 6)
