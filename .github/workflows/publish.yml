@@ -1,9 +1,9 @@
-name: Generate a build and push to dev_build
+name: Generate a build and push to build
 
 on:
   push:
     branches:
-      - dev
+      - master
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: dev_build   # La branche où tu veux pousser les fichiers
+          BRANCH: build   # La branche où tu veux pousser les fichiers
           FOLDER: dist        # Répertoire 'dist' comme répertoire d'output
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
