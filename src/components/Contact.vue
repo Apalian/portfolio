@@ -232,7 +232,7 @@ const handleSubmit = async () => {
   showError.value = false
 
   try {
-    const response = await fetch('https://portfolio.lespi.fr/dev/send-email.php', {
+    const response = await fetch('https://portfolio.lespi.fr/send-email.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
