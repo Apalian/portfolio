@@ -94,6 +94,10 @@
     "title": "Contactez-moi",
     "subtitle": "Discutons de votre prochain projet",
     "location": "Localisation",
+    "videoResume": "CV Vidéo",
+    "videoResumeLink": "Voir la vidéo",
+    "downloadResume": "Télécharger mon CV",
+    "downloadResumeLink": "Télécharger PDF",
     "form": {
       "name": "Nom",
       "namePlaceholder": "Votre nom",

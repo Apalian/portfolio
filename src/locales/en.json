@@ -94,6 +94,10 @@
     "title": "Get in Touch",
     "subtitle": "Let's discuss your next project",
     "location": "Location",
+    "videoResume": "Video Resume",
+    "videoResumeLink": "Watch video",
+    "downloadResume": "Download Resume",
+    "downloadResumeLink": "Download PDF",
     "form": {
       "name": "Name",
       "namePlaceholder": "Your name",
