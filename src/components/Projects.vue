@@ -37,7 +37,6 @@
                   rel="noopener noreferrer"
                   class="px-4 py-2 bg-white text-gray-800 rounded-lg hover:bg-gray-100 transition-colors font-medium"
                 >
-
                   GitHub
                 </a>
                 <a
@@ -76,7 +75,11 @@
           @click="toggleShowAll"
           class="px-8 py-3 bg-kelly-green text-white rounded-lg hover:bg-kelly-green/90 transition-colors font-medium"
         >
-          {{ showAll ? t('projects.showLess') : t('projects.showMore', { count: projects.length - 6 }) }}
+          {{
+            showAll
+              ? t('projects.showLess')
+              : t('projects.showMore', { count: projects.length - 6 })
+          }}
         </button>
       </div>
     </div>
@@ -90,6 +93,7 @@ import { useI18n } from 'vue-i18n'
 import blindioCover from '@/assets/images/blindioCover.svg'
 import mnistCover from '@/assets/images/mnistCover.webp'
 import snakeCover from '@/assets/images/snakeCover.png'
+import nuitInfoCover from '@/assets/images/nuitInfoCover.webp'
 
 const { t, tm } = useI18n()
 
@@ -125,15 +129,16 @@ const setProjectRef = (el: Element | ComponentPublicInstance | null, index: numb
 const projectImages: Record<number, string> = {
   1: blindioCover,
   2: mnistCover,
-  3: snakeCover
+  3: snakeCover,
+  4: nuitInfoCover,
 }
 
 // Computed projects avec traductions
 const projects = computed(() => {
   const projectsData = tm('projects.items') as Project[]
-  return projectsData.map(project => ({
+  return projectsData.map((project) => ({
     ...project,
-    image: projectImages[project.id] || blindioCover
+    image: projectImages[project.id] || blindioCover,
   }))
 })
 

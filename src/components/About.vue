@@ -27,10 +27,24 @@
 
           <!-- Info rapide -->
           <div ref="infoRef" class="space-y-2 text-lg text-gray-600">
-            <p class="opacity-0"><span class="font-semibold">{{ t('about.location') }}:</span> {{ t('about.locationValue') }}</p>
-            <p class="opacity-0"><span class="font-semibold">{{ t('about.education') }}:</span> {{ t('about.educationValue') }}</p>
             <p class="opacity-0">
-              <span class="font-semibold">{{ t('about.specialty') }}:</span> {{ t('about.specialtyValue') }}
+              <span class="font-semibold">{{ t('about.location') }}:</span>
+              {{ t('about.locationValue') }}
+            </p>
+            <p class="opacity-0">
+              <span class="font-semibold">{{ t('about.education') }}:</span>
+              {{ t('about.educationValue') }}
+            </p>
+            <p class="opacity-0">
+              <span class="font-semibold">{{ t('about.specialty') }}:</span>
+              {{ t('about.specialtyValue') }}
+            </p>
+            <p class="opacity-0">
+              <span class="font-semibold">{{ t('about.birth') }}:</span> {{ t('about.birthValue') }}
+            </p>
+            <p class="opacity-0">
+              <span class="font-semibold">{{ t('about.mobility') }}:</span>
+              {{ t('about.mobilityValue') }}
             </p>
           </div>
         </div>

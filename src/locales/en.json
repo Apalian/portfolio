@@ -18,6 +18,10 @@
     "educationValue": "Bachelor's Degree Of Computer Science",
     "specialty": "Specialty",
     "specialtyValue": "Data & Machine Learning",
+    "birth": "Birth Date",
+    "birthValue": "April 12 2005",
+    "mobility": "Mobility",
+    "mobilityValue": "Driving License + Vehicle owner",
     "description": {
       "p1": "Passionate about machine learning and artificial intelligence, I am always looking for new ways to leverage data to solve real-world problems.",
       "p2": "Through my academic and personal projects, I have developed strong skills in Python, TensorFlow, and SQL, as well as a deep understanding of machine learning algorithms.",
@@ -85,6 +89,14 @@
         "title": "Snake Game AI",
         "description": "After exploring the basics of machine learning with the MNIST project, I decided to push my skills further by developing an AI capable of playing the Snake game. Using Deep Reinforcement Learning techniques, I trained a model to maximize its score by learning to navigate the game environment.",
         "technologies": ["AI", "TensorFlow", "NumPy"],
+        "github": "",
+        "demo": ""
+      },
+      {
+        "id": 4,
+        "title": "Nuit de l'Info 2025",
+        "description": "Team development of an ecology awareness web application during Nuit de l'Info 2025. Our team won the 'worst code' award and placed 2nd in the generative AI video challenge.",
+        "technologies": ["Vue.js", "AI"],
         "github": "",
         "demo": ""
       }

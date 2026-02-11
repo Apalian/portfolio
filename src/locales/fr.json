@@ -18,6 +18,10 @@
     "educationValue": "Bac +3",
     "specialty": "Spécialité",
     "specialtyValue": "Data & Machine Learning",
+    "birth": "Date de naissance",
+    "birthValue": "12 Avril 2005",
+    "mobility": "Mobilité",
+    "mobilityValue": "Permis B et véhiculé",
     "description": {
       "p1": "Passionné par l'apprentissage automatique et l'intelligence artificielle, je suis toujours à la recherche de nouvelles façons d'exploiter les données pour résoudre des problèmes réels.",
       "p2": "Grace à mes expériences en projets académiques et personnels, j'ai développé des compétences solides en Python, TensorFlow, et SQL, ainsi qu'une compréhension approfondie des algorithmes de machine learning.",
@@ -85,6 +89,14 @@
         "title": "Snake Game AI",
         "description": "Après avoir exploré les bases de l'apprentissage automatique avec le projet MNIST, j'ai décidé de pousser mes compétences plus loin en développant une IA capable de jouer au jeu du Snake. En utilisant des techniques de Deep Reinforcement Learning, j'ai entraîné un modèle à maximiser son score en apprenant à naviguer dans l'environnement du jeu.",
         "technologies": ["AI", "TensorFlow", "NumPy"],
+        "github": "",
+        "demo": ""
+      },
+      {
+        "id": 4,
+        "title": "Nuit de l'info 2025",
+        "description": "Développement en équipe d'une application web de sensibilisation à l'écologie lors de la Nuit de l'Info 2025. Notre équipe a remporté le prix 'ON EN A GROS' et la 2ème place au défi 'IA en Action'.",
+        "technologies": ["Vue.js", "AI"],
         "github": "",
         "demo": ""
       }
