@@ -1,510 +1,458 @@
 <template>
-  <section id="skills" class="min-h-screen bg-white overflow-hidden">
-    <div class="hexagon-grid" ref="hexagonGridRef">
+  <section id="skills" class="relative bg-white py-20 overflow-hidden">
+    <!-- Header -->
+    <div ref="headerRef" class="relative z-10 text-center px-6 mb-6 opacity-0">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{{ t('skills.title') }}</h2>
       <div
-        v-for="row in rows"
-        :key="row"
-        class="hexagon-row"
-        :style="{ marginLeft: row % 2 === 0 ? `${hexWidth / 2}px` : '0' }"
+        class="w-24 h-1 bg-linear-to-r from-kelly-green via-dark-lemon to-acid-green mx-auto animated-background"
+      ></div>
+      <p class="mt-5 text-gray-500 text-sm md:text-base">
+        {{ isTouch ? t('skills.hintTouch') : t('skills.hint') }}
+      </p>
+    </div>
+
+    <!-- Grille d'hexagones -->
+    <div ref="gridRef" class="relative w-full" :style="{ height: `${gridHeight}px` }">
+      <div
+        v-for="cell in cells"
+        :key="cell.key"
+        class="hex-wrapper"
+        :class="{ 'hex-wrapper--skill': cell.skill }"
+        :style="{
+          left: `${cell.x}px`,
+          top: `${cell.y}px`,
+          width: `${hexW}px`,
+          height: `${hexH}px`,
+          opacity: cell.skill ? 1 : cell.opacity,
+        }"
       >
-        <div v-for="col in cols" :key="`${row}-${col}`" class="hexagon-wrapper">
-          <div
-            class="hexagon-flip-container"
-            :ref="(el) => setHexagonRef(el, row, col)"
-            @click="animateFlip(row, col)"
-            :style="{
-              width: `${hexWidth}px`,
-              height: `${hexHeight}px`,
-              cursor: getSpecialHexagon(row, col) ? 'pointer' : 'default',
-              zIndex: getZIndex(row, col),
-            }"
-          >
-            <!-- Face avant -->
-            <svg
-              :width="hexWidth"
-              :height="hexHeight"
-              class="hexagon-svg hexagon-front"
-              :style="{ opacity: getOpacity(row, col) }"
-              :data-distance="getDistanceFromCenter(row, col)"
-              :data-is-special="!!getSpecialHexagon(row, col)"
-              :data-fill-color="getHexagonFill(row, col)"
-            >
-              <defs>
-                <!-- Filtre pour l'ombre portée -->
-                <filter :id="`shadow-${row}-${col}`" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-                  <feOffset dx="0" dy="8" result="offsetblur" />
-                  <feComponentTransfer>
-                    <feFuncA type="linear" slope="0.3" />
-                  </feComponentTransfer>
-                  <feMerge>
-                    <feMergeNode />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+        <!-- Hexagone décoratif -->
+        <svg v-if="!cell.skill" :width="hexW" :height="hexH" class="block overflow-visible">
+          <polygon
+            :points="hexPoints"
+            class="hex-outline"
+            fill="none"
+            :stroke="cell.color"
+            stroke-width="1.5"
+          />
+        </svg>
 
-              <polygon
-                :points="getHexagonPoints()"
-                class="hexagon-shape"
-                :class="{ 'hexagon-special': getSpecialHexagon(row, col) }"
-                fill="transparent"
-                :stroke="getHexagonStroke(row, col)"
-                stroke-width="2"
-                :filter="isAnimating(row, col) ? `url(#shadow-${row}-${col})` : ''"
-              />
+        <!-- Hexagone compétence (recto / verso) -->
+        <button
+          v-else
+          type="button"
+          class="hex-card"
+          :data-key="cell.key"
+          :ref="(el) => setCardRef(el, cell.key)"
+          :aria-label="cell.skill.name"
+          :aria-pressed="flipped.has(cell.key)"
+          @click="flip(cell.key)"
+          @pointerenter="(e) => hoverIn(e, cell.key)"
+          @pointerleave="(e) => hoverOut(e, cell.key)"
+        >
+          <!-- Recto : icône -->
+          <svg :width="hexW" :height="hexH" class="hex-face overflow-visible">
+            <polygon :points="hexPoints" fill="white" :stroke="cell.color" stroke-width="2" />
+            <polygon
+              :points="hexPoints"
+              class="hex-fill"
+              :fill="cell.color"
+              fill-opacity="0.12"
+              stroke="none"
+            />
+            <foreignObject :x="hexW * 0.25" :y="hexH * 0.25" :width="hexW * 0.5" :height="hexH * 0.5">
+              <div class="w-full h-full flex items-center justify-center">
+                <Icon :icon="cell.skill.icon" :width="hexW * 0.42" :height="hexW * 0.42" class="hex-icon" />
+              </div>
+            </foreignObject>
+          </svg>
 
-              <foreignObject
-                v-if="getHexagonIcon(row, col)"
-                :x="hexWidth * 0.25"
-                :y="hexHeight * 0.25"
-                :width="hexWidth * 0.5"
-                :height="hexHeight * 0.5"
-                class="hexagon-icon-wrapper"
-                style="opacity: 0"
-              >
-                <div class="flex items-center justify-center w-full h-full">
-                  <Icon
-                    :icon="getHexagonIcon(row, col)"
-                    :width="hexWidth * 0.4"
-                    :height="hexHeight * 0.4"
-                  />
-                </div>
-              </foreignObject>
-            </svg>
-
-            <!-- Face arrière -->
-            <svg
-              v-if="getSpecialHexagon(row, col)"
-              :width="hexWidth"
-              :height="hexHeight"
-              class="hexagon-svg hexagon-back"
-              :style="{ opacity: getOpacity(row, col) }"
-            >
-              <polygon
-                :points="getHexagonPoints()"
-                :fill="getHexagonFill(row, col)"
-                stroke="white"
-                stroke-width="2"
-                :filter="isAnimating(row, col) ? `url(#shadow-${row}-${col})` : ''"
-              />
-
-              <foreignObject
-                :x="hexWidth * 0.1"
-                :y="hexHeight * 0.3"
-                :width="hexWidth * 0.8"
-                :height="hexHeight * 0.4"
-              >
-                <div class="flex items-center justify-center w-full h-full text-center px-2">
-                  <span class="text-white font-semibold text-sm">
-                    {{ getSpecialHexagon(row, col).skill }}
-                  </span>
-                </div>
-              </foreignObject>
-            </svg>
-          </div>
-        </div>
+          <!-- Verso : nom + contexte -->
+          <svg :width="hexW" :height="hexH" class="hex-face hex-face--back overflow-visible">
+            <defs>
+              <linearGradient :id="`grad-${cell.key}`" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#49a115" />
+                <stop offset="100%" stop-color="#b4c50c" />
+              </linearGradient>
+            </defs>
+            <polygon :points="hexPoints" :fill="`url(#grad-${cell.key})`" stroke="white" stroke-width="2" />
+            <foreignObject :x="hexW * 0.08" :y="hexH * 0.22" :width="hexW * 0.84" :height="hexH * 0.56">
+              <div class="w-full h-full flex flex-col items-center justify-center text-center text-white leading-tight">
+                <span class="font-bold" :style="{ fontSize: `${Math.max(11, hexW * 0.11)}px` }">
+                  {{ cell.skill.name }}
+                </span>
+                <span
+                  v-if="hexW >= 105"
+                  class="mt-1 opacity-90"
+                  :style="{ fontSize: `${Math.max(9, hexW * 0.075)}px` }"
+                >
+                  {{ t(`skills.items.${cell.skill.id}`) }}
+                </span>
+              </div>
+            </foreignObject>
+          </svg>
+        </button>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { Icon } from '@iconify/vue'
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { Icon, addCollection } from '@iconify/vue'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useI18n } from 'vue-i18n'
+import skillIcons from '@/assets/skill-icons.json'
 
-gsap.registerPlugin(ScrollTrigger)
+// Icônes embarquées : pas d'appel réseau, affichage instantané
+addCollection(skillIcons.logos as any)
+addCollection(skillIcons.devicon as any)
 
-const hexWidth = ref(150)
-const hexHeight = computed(() => hexWidth.value * 1.1547)
-const hexagonGridRef = ref(null)
+const { t } = useI18n()
 
-const cols = ref(Math.ceil(window.innerWidth / hexWidth.value) + 2)
-const rows = ref(Math.ceil(window.innerHeight / (hexHeight.value * 0.75)) + 2)
-
-// Références pour chaque hexagone
-const hexagonRefs = ref({})
-
-// État pour gérer les hexagones retournés et en cours d'animation
-const flippedHexagons = ref(new Set())
-const animatingHexagons = ref(new Set())
-
-// Couleurs du dégradé
-const colors = {
-  kellyGreen: '#49a115',
-  darkLemon: '#94b911',
-  acidGreen: '#b4c50c',
+interface Skill {
+  id: string
+  name: string
+  icon: string
 }
 
-// Centre de la grille
-const centerRow = computed(() => Math.floor(rows.value / 2))
-const centerCol = computed(() => Math.floor(cols.value / 2))
+interface Cell {
+  key: string
+  x: number
+  y: number
+  color: string
+  opacity: number
+  distance: number
+  skill?: Skill
+}
 
-// Distance maximale pour normaliser l'opacité
-const maxDistance = computed(() => {
-  return Math.sqrt(Math.pow(centerRow.value, 2) + Math.pow(centerCol.value, 2))
+// Losange 2-3-4-3-2 : chaque ligne s'emboîte naturellement dans la suivante
+const skillRows: Skill[][] = [
+  [
+    { id: 'python', name: 'Python', icon: 'logos:python' },
+    { id: 'pytorch', name: 'PyTorch', icon: 'logos:pytorch-icon' },
+  ],
+  [
+    { id: 'pandas', name: 'Pandas', icon: 'logos:pandas-icon' },
+    { id: 'numpy', name: 'NumPy', icon: 'logos:numpy' },
+    { id: 'sklearn', name: 'scikit-learn', icon: 'devicon:scikitlearn' },
+  ],
+  [
+    { id: 'tensorflow', name: 'TensorFlow', icon: 'logos:tensorflow' },
+    { id: 'postgresql', name: 'PostgreSQL', icon: 'logos:postgresql' },
+    { id: 'typescript', name: 'TypeScript', icon: 'logos:typescript-icon' },
+    { id: 'powerbi', name: 'Power BI', icon: 'logos:microsoft-power-bi' },
+  ],
+  [
+    { id: 'react', name: 'React', icon: 'logos:react' },
+    { id: 'nextjs', name: 'Next.js', icon: 'logos:nextjs-icon' },
+    { id: 'vue', name: 'Vue.js', icon: 'logos:vue' },
+  ],
+  [
+    { id: 'docker', name: 'Docker', icon: 'logos:docker-icon' },
+    { id: 'git', name: 'Git', icon: 'devicon:git' },
+  ],
+]
+
+const palette = ['#49a115', '#94b911', '#b4c50c']
+
+// --- Dimensions responsives ---
+const viewportW = ref(typeof window !== 'undefined' ? window.innerWidth : 1280)
+const isTouch = ref(false)
+
+const hexW = computed(() => {
+  // Le losange fait 4 hexagones de large : on garde une marge sur mobile
+  const fit = (viewportW.value - 32) / 4.2
+  return Math.round(Math.max(72, Math.min(140, fit)))
+})
+const hexH = computed(() => hexW.value * 1.1547)
+const rowStep = computed(() => hexH.value * 0.75)
+
+const totalRows = computed(() => (viewportW.value < 640 ? 7 : 9))
+const gridHeight = computed(() => (totalRows.value - 1) * rowStep.value + hexH.value)
+
+const hexPoints = computed(() => {
+  const w = hexW.value
+  const h = hexH.value
+  return `${w / 2},0 ${w},${h / 4} ${w},${(h * 3) / 4} ${w / 2},${h} 0,${(h * 3) / 4} 0,${h / 4}`
 })
 
-// Définir les hexagones spéciaux avec leurs compétences
-const specialHexagons = ref([
-  { row: -1, col: -1, skill: 'Python', icon: 'logos:python' },
-  { row: -1, col: 0, skill: 'TensorFlow', icon: 'logos:tensorflow' },
-  { row: -1, col: 1, skill: 'NumPy', icon: 'logos:numpy' },
-
-  { row: 0, col: -2, skill: 'MySql', icon: 'logos:mysql' },
-  { row: 0, col: -1, skill: 'PostgreSQL', icon: 'logos:postgresql' },
-  { row: 0, col: 0, skill: 'MongoDB', icon: 'devicon:mongodb' },
-
-  { row: 1, col: -3, skill: 'HTML5', icon: 'devicon:html5' },
-  { row: 1, col: -2, skill: 'CSS3', icon: 'devicon:css3' },
-  { row: 1, col: -1, skill: 'PHP', icon: 'logos:php' },
-  { row: 1, col: 0, skill: 'JavaScript', icon: 'logos:javascript' },
-  { row: 1, col: 1, skill: 'TypeScript', icon: 'devicon:typescript' },
-
-  { row: 2, col: -2, skill: 'Node.js', icon: 'logos:nodejs' },
-  { row: 2, col: -1, skill: 'Express.js', icon: 'logos:express' },
-  { row: 2, col: 0, skill: 'Vue.js', icon: 'logos:vue' },
-  { row: 2, col: 1, skill: 'React', icon: 'logos:react' },
-
-  { row: 3, col: -1, skill: 'Git', icon: 'devicon:git' },
-  { row: 3, col: 0, skill: 'Linux', icon: 'logos:linux-tux' },
-])
-
-// Stocker les refs des hexagones
-const setHexagonRef = (el, row, col) => {
-  if (el) {
-    hexagonRefs.value[`${row}-${col}`] = el
-  }
+const mix = (a: string, b: string, f: number) => {
+  const p = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16)
+  const c = [0, 1, 2].map((i) => Math.round(p(a, i) + (p(b, i) - p(a, i)) * f))
+  return `#${c.map((v) => v.toString(16).padStart(2, '0')).join('')}`
 }
 
-// Gérer le z-index dynamiquement
-const getZIndex = (row, col) => {
-  const key = `${row}-${col}`
-  return animatingHexagons.value.has(key) ? 1000 : 1
+const colorAt = (d: number) => {
+  if (d < 0.5) return mix(palette[0], palette[1], d / 0.5)
+  return mix(palette[1], palette[2], Math.min(1, (d - 0.5) / 0.5))
 }
 
-// Vérifier si l'hexagone est en cours d'animation
-const isAnimating = (row, col) => {
-  return animatingHexagons.value.has(`${row}-${col}`)
-}
+const cells = computed<Cell[]>(() => {
+  const w = hexW.value
+  const h = hexH.value
+  const width = viewportW.value
+  const rows = totalRows.value
+  const centerRow = Math.floor(rows / 2)
+  const cx = width / 2
+  const cy = centerRow * rowStep.value + h / 2
+  const maxDist = Math.hypot(width / 2, gridHeight.value / 2)
 
-// Animation de flip avec soulèvement
-const animateFlip = (row, col) => {
-  const special = getSpecialHexagon(row, col)
-  if (!special) return
+  const shift = (r: number) => (((r - centerRow) % 2) + 2) % 2 === 0 ? 0 : w / 2
+  // Origine choisie pour que la ligne centrale (4 hexagones) soit centrée
+  const origin = (((cx - 2 * w) % w) + w) % w - w
 
-  const key = `${row}-${col}`
+  const firstSkillRow = centerRow - Math.floor(skillRows.length / 2)
+  const result: Cell[] = []
 
-  // Empêcher les clics pendant l'animation
-  if (animatingHexagons.value.has(key)) return
+  for (let r = 0; r < rows; r++) {
+    const y = r * rowStep.value
+    const skillRow = skillRows[r - firstSkillRow]
+    const rowStart = skillRow ? cx - (skillRow.length * w) / 2 : 0
 
-  animatingHexagons.value.add(key)
-  animatingHexagons.value = new Set(animatingHexagons.value) // Force reactivity
-
-  const hexElement = hexagonRefs.value[key]
-  if (!hexElement) return
-
-  const isCurrentlyFlipped = flippedHexagons.value.has(key)
-  const targetRotation = isCurrentlyFlipped ? 0 : 180
-
-  // Timeline pour l'animation complète
-  const tl = gsap.timeline({
-    onComplete: () => {
-      animatingHexagons.value.delete(key)
-      animatingHexagons.value = new Set(animatingHexagons.value) // Force reactivity
-
-      // Mettre à jour l'état flippé
-      if (isCurrentlyFlipped) {
-        flippedHexagons.value.delete(key)
-      } else {
-        flippedHexagons.value.add(key)
+    for (let x = origin + shift(r) - w; x < width + w; x += w) {
+      const dist = Math.hypot(x + w / 2 - cx, y + h / 2 - cy) / maxDist
+      let skill: Skill | undefined
+      if (skillRow) {
+        const j = Math.round((x - rowStart) / w)
+        if (j >= 0 && j < skillRow.length && Math.abs(x - (rowStart + j * w)) < 1) {
+          skill = skillRow[j]
+        }
       }
-      flippedHexagons.value = new Set(flippedHexagons.value)
-    },
-  })
-
-  // 1. Soulever vers le haut avec scale et z
-  tl.to(hexElement, {
-    y: -30, // Déplacement vers le haut
-    z: 100, // Profondeur 3D
-    scale: 1.15, // Légèrement plus grand
-    duration: 0.35,
-    ease: 'power2.out',
-  })
-
-  // 2. Rotation pendant qu'il est en l'air
-  tl.to(
-    hexElement,
-    {
-      rotationY: targetRotation,
-      duration: 0.5,
-      ease: 'power2.inOut',
-    },
-    '-=0.15'
-  )
-
-  // 3. Redescendre et revenir à la taille normale
-  tl.to(
-    hexElement,
-    {
-      y: 0,
-      z: 0,
-      scale: 1,
-      duration: 0.35,
-      ease: 'power2.in',
-    },
-    '-=0.15'
-  )
-}
-
-const isFlipped = (row, col) => {
-  return flippedHexagons.value.has(`${row}-${col}`)
-}
-
-// Calculer la distance depuis le centre
-const getDistanceFromCenter = (row, col) => {
-  const rowDiff = row - centerRow.value
-  const colDiff = col - centerCol.value
-  return Math.sqrt(rowDiff * rowDiff + colDiff * colDiff)
-}
-
-// Interpoler entre deux couleurs
-const interpolateColor = (color1, color2, factor) => {
-  const hex1 = color1.replace('#', '')
-  const hex2 = color2.replace('#', '')
-
-  const r1 = parseInt(hex1.substring(0, 2), 16)
-  const g1 = parseInt(hex1.substring(2, 4), 16)
-  const b1 = parseInt(hex1.substring(4, 6), 16)
-
-  const r2 = parseInt(hex2.substring(0, 2), 16)
-  const g2 = parseInt(hex2.substring(2, 4), 16)
-  const b2 = parseInt(hex2.substring(4, 6), 16)
-
-  const r = Math.round(r1 + (r2 - r1) * factor)
-  const g = Math.round(g1 + (g2 - g1) * factor)
-  const b = Math.round(b1 + (b2 - b1) * factor)
-
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b
-    .toString(16)
-    .padStart(2, '0')}`
-}
-
-// Obtenir la couleur basée sur la distance (utilisée pour stroke ET fill)
-const getColorFromDistance = (row, col) => {
-  const distance = getDistanceFromCenter(row, col)
-  const normalizedDistance = distance / maxDistance.value
-
-  if (normalizedDistance < 0.33) {
-    const factor = normalizedDistance / 0.33
-    return interpolateColor(colors.kellyGreen, colors.darkLemon, factor)
-  } else if (normalizedDistance < 0.66) {
-    const factor = (normalizedDistance - 0.33) / 0.33
-    return interpolateColor(colors.darkLemon, colors.acidGreen, factor)
-  } else {
-    return colors.acidGreen
-  }
-}
-
-// Calculer l'opacité basée sur la distance
-const getOpacity = (row, col) => {
-  const distance = getDistanceFromCenter(row, col)
-  const normalizedDistance = distance / maxDistance.value
-
-  const minOpacity = 0
-  const fadeStart = 0.2
-
-  if (normalizedDistance < fadeStart) {
-    return 1
-  }
-
-  const adjustedDistance = (normalizedDistance - fadeStart) / (1 - fadeStart)
-  return 1 - adjustedDistance * (1 - minOpacity)
-}
-
-// Vérifier si c'est un hexagone spécial
-const getSpecialHexagon = (row, col) => {
-  const relativeRow = row - centerRow.value
-  const relativeCol = col - centerCol.value
-
-  return specialHexagons.value.find((hex) => hex.row === relativeRow && hex.col === relativeCol)
-}
-
-// Obtenir le fill de l'hexagone
-const getHexagonFill = (row, col) => {
-  const special = getSpecialHexagon(row, col)
-
-  if (special) {
-    return getColorFromDistance(row, col)
-  }
-
-  return 'transparent'
-}
-
-// Obtenir le stroke de l'hexagone
-const getHexagonStroke = (row, col) => {
-  const special = getSpecialHexagon(row, col)
-
-  if (special) {
-    return 'white'
-  }
-
-  return getColorFromDistance(row, col)
-}
-
-// Obtenir l'icône de l'hexagone
-const getHexagonIcon = (row, col) => {
-  const special = getSpecialHexagon(row, col)
-  return special ? special.icon : null
-}
-
-const getHexagonPoints = () => {
-  const w = hexWidth.value
-  const h = hexHeight.value
-
-  return `
-    ${w / 2},0
-    ${w},${h / 4}
-    ${w},${(h * 3) / 4}
-    ${w / 2},${h}
-    0,${(h * 3) / 4}
-    0,${h / 4}
-  `
-}
-
-// Animation GSAP
-const setupAnimation = () => {
-  const allHexagons = document.querySelectorAll('.hexagon-shape')
-
-  if (allHexagons.length === 0) return
-
-  const hexagonsByDistance = Array.from(allHexagons).map((hex) => {
-    const svg = hex.closest('.hexagon-svg')
-    const distance = parseFloat(svg.getAttribute('data-distance'))
-    const isSpecial = svg.getAttribute('data-is-special') === 'true'
-    const fillColor = svg.getAttribute('data-fill-color')
-    const strokeColor = hex.getAttribute('stroke')
-    const icon = svg.querySelector('.hexagon-icon-wrapper')
-    return { hex, icon, distance, isSpecial, fillColor, strokeColor }
-  })
-
-  hexagonsByDistance.sort((a, b) => a.distance - b.distance)
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: hexagonGridRef.value,
-      start: 'top 50%',
-      toggleActions: 'play none none none',
-    },
-  })
-
-  hexagonsByDistance.forEach(({ hex, icon, isSpecial, fillColor, strokeColor }, index) => {
-    const delay = index * 0.02
-
-    if (isSpecial) {
-      tl.to(
-        hex,
-        {
-          fill: fillColor,
-          duration: 0.4,
-          ease: 'power2.out',
-        },
-        delay
-      )
-
-      if (icon) {
-        tl.to(
-          icon,
-          {
-            opacity: 1,
-            duration: 0.3,
-            ease: 'power2.out',
-          },
-          delay + 0.2
-        )
-      }
-    } else {
-      tl.fromTo(
-        hex,
-        {
-          strokeOpacity: 0,
-        },
-        {
-          strokeOpacity: 1,
-          duration: 0.3,
-          ease: 'power2.out',
-        },
-        delay
-      )
+      result.push({
+        key: skill ? skill.id : `bg-${r}-${Math.round(x)}`,
+        x,
+        y,
+        distance: dist,
+        color: colorAt(dist * 1.6),
+        opacity: Math.max(0, 1 - Math.max(0, dist - 0.12) * 1.9),
+        skill,
+      })
     }
-  })
+  }
+  return result
+})
+
+// --- Animations ---
+const headerRef = ref<HTMLElement>()
+const gridRef = ref<HTMLElement>()
+const cardRefs = new Map<string, HTMLElement>()
+const flipped = ref(new Set<string>())
+const busy = new Set<string>()
+
+const setCardRef = (el: unknown, key: string) => {
+  if (el) cardRefs.set(key, el as HTMLElement)
 }
 
-onMounted(() => {
-  setTimeout(() => {
-    setupAnimation()
-  }, 100)
+const reducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const hoverIn = (e: PointerEvent, key: string) => {
+  if (e.pointerType !== 'mouse' || busy.has(key)) return
+  const el = cardRefs.get(key)
+  if (!el) return
+  el.parentElement!.style.zIndex = '20'
+  gsap.to(el, { y: -10, scale: 1.08, duration: 0.35, ease: 'power3.out' })
+  el.classList.add('is-lifted')
+}
+
+const hoverOut = (e: PointerEvent, key: string) => {
+  if (e.pointerType !== 'mouse' || busy.has(key)) return
+  const el = cardRefs.get(key)
+  if (!el) return
+  gsap.to(el, {
+    y: 0,
+    scale: 1,
+    duration: 0.45,
+    ease: 'back.out(2)',
+    onComplete: () => {
+      el.parentElement!.style.zIndex = ''
+    },
+  })
+  el.classList.remove('is-lifted')
+}
+
+const flip = (key: string) => {
+  const el = cardRefs.get(key)
+  if (!el || busy.has(key)) return
+  busy.add(key)
+
+  const toBack = !flipped.value.has(key)
+  const next = new Set(flipped.value)
+  if (toBack) next.add(key)
+  else next.delete(key)
+  flipped.value = next
+
+  el.parentElement!.style.zIndex = '30'
+  el.classList.add('is-lifted')
+
+  const hovered = el.matches(':hover') && !isTouch.value
+  gsap
+    .timeline({
+      onComplete: () => {
+        busy.delete(key)
+        if (!hovered) {
+          el.classList.remove('is-lifted')
+          el.parentElement!.style.zIndex = ''
+        }
+      },
+    })
+    // 1. Soulèvement
+    .to(el, { y: -22, scale: 1.16, duration: 0.25, ease: 'power2.out' })
+    // 2. Retournement en l'air
+    .to(el, { rotationY: toBack ? 180 : 0, duration: 0.55, ease: 'power3.inOut' }, '-=0.1')
+    // 3. Atterrissage avec un léger rebond
+    .to(
+      el,
+      {
+        y: hovered ? -10 : 0,
+        scale: hovered ? 1.08 : 1,
+        duration: 0.45,
+        ease: 'back.out(2.2)',
+      },
+      '-=0.2'
+    )
+}
+
+let entranceObserver: IntersectionObserver | null = null
+let played = false
+
+const playEntrance = () => {
+  if (played || !gridRef.value) return
+  played = true
+
+  gsap.to(headerRef.value!, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
+  if (reducedMotion) return
+
+  const outlines = Array.from(gridRef.value.querySelectorAll<SVGPolygonElement>('.hex-outline'))
+
+  // Vague depuis le centre pour la grille décorative
+  const cx = gridRef.value.clientWidth / 2
+  const cy = gridRef.value.clientHeight / 2
+  const dist = (el: Element) => {
+    const w = el.closest('.hex-wrapper') as HTMLElement
+    return Math.hypot(w.offsetLeft + hexW.value / 2 - cx, w.offsetTop + hexH.value / 2 - cy)
+  }
+  outlines
+    .sort((a, b) => dist(a) - dist(b))
+    .forEach((o) => {
+      gsap.fromTo(
+        o,
+        { strokeOpacity: 0 },
+        { strokeOpacity: 1, duration: 0.5, delay: dist(o) / 1400, ease: 'power1.out' }
+      )
+    })
+
+  // Les compétences apparaissent en rebondissant, du centre vers l'extérieur
+  const cards = Array.from(cardRefs.values()).sort((a, b) => dist(a) - dist(b))
+  gsap.fromTo(
+    cards,
+    { scale: 0.4, opacity: 0, y: 20 },
+    {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'back.out(1.8)',
+      stagger: 0.05,
+      delay: 0.15,
+    }
+  )
+}
+
+const onResize = () => {
+  viewportW.value = document.documentElement.clientWidth
+}
+
+onMounted(async () => {
+  isTouch.value = window.matchMedia('(hover: none)').matches
+  onResize()
+  window.addEventListener('resize', onResize, { passive: true })
+  await nextTick()
+
+  if (!reducedMotion) {
+    gsap.set(Array.from(cardRefs.values()), { opacity: 0 })
+    gsap.set(gridRef.value!.querySelectorAll('.hex-outline'), { strokeOpacity: 0 })
+    gsap.set(headerRef.value!, { y: 30 })
+  }
+
+  entranceObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        playEntrance()
+        entranceObserver?.disconnect()
+      }
+    },
+    { threshold: 0.25 }
+  )
+  if (gridRef.value) entranceObserver.observe(gridRef.value)
 })
 
 onUnmounted(() => {
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+  window.removeEventListener('resize', onResize)
+  entranceObserver?.disconnect()
 })
 </script>
 
 <style scoped>
-.hexagon-grid {
-  display: flex;
-  flex-direction: column;
-  margin-top: -10px;
+.hex-wrapper {
+  position: absolute;
+  perspective: 900px;
 }
 
-.hexagon-row {
-  display: flex;
-  margin-top: -43px;
+.hex-outline {
+  stroke-opacity: 1;
 }
 
-.hexagon-wrapper {
-  display: inline-block;
-  perspective: 1000px;
-}
-
-.hexagon-flip-container {
+.hex-card {
   position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
   transform-style: preserve-3d;
-  transition: z-index 0s;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.hexagon-svg {
+/* L'ombre est portée par chaque face : un filter sur la carte casserait la 3D */
+.hex-face {
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.06));
+  transition: filter 0.35s ease;
+}
+
+.hex-card.is-lifted .hex-face {
+  filter: drop-shadow(0 14px 16px rgb(73 161 21 / 0.3));
+}
+
+.hex-card:focus-visible {
+  outline: none;
+}
+
+.hex-card:focus-visible .hex-face polygon:first-of-type {
+  stroke: #49a115;
+  stroke-width: 4;
+}
+
+.hex-face {
+  position: absolute;
+  inset: 0;
   display: block;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-.hexagon-front {
-  position: relative;
-  z-index: 2;
-}
-
-.hexagon-back {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hex-face--back {
   transform: rotateY(180deg);
-  z-index: 1;
 }
 
-.hexagon-shape {
-  stroke-opacity: 0;
-  transition: all 0.3s ease;
+.hex-fill {
+  transition: fill-opacity 0.3s ease;
 }
 
-.hexagon-icon {
-  pointer-events: none;
-  opacity: 0.9;
-}
-
-.hexagon-shape:hover {
-  opacity: 0.8;
+.hex-card.is-lifted .hex-fill {
+  fill-opacity: 0.22;
 }
 </style>

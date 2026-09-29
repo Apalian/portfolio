@@ -2,59 +2,98 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "education": "Education",
+    "education": "Background",
     "skills": "Skills",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "resume": "Resume"
   },
   "hero": {
-    "subtitle": "Data Science Student"
+    "subtitle": "Data Scientist Apprentice at Dalkia",
+    "resume": "View my resume",
+    "contact": "Get in touch"
   },
   "about": {
     "title": "About",
     "location": "Location",
     "locationValue": "Toulouse, France",
     "education": "Education",
-    "educationValue": "Bachelor's Degree Of Computer Science",
-    "specialty": "Specialty",
-    "specialtyValue": "Data & Machine Learning",
+    "educationValue": "MSc in Data Science & Engineering",
+    "specialty": "Position",
+    "specialtyValue": "Data Scientist Apprentice, Dalkia (EDF Group)",
     "description": {
-      "p1": "Passionate about machine learning and artificial intelligence, I am always looking for new ways to leverage data to solve real-world problems.",
-      "p2": "Through my academic and personal projects, I have developed strong skills in Python, TensorFlow, and SQL, as well as a deep understanding of machine learning algorithms.",
-      "p3": "I am enthusiastic about collaborating on innovative projects that push the boundaries of technology and bring real added value."
+      "p1": "I'm a Master's student in Data Science & Engineering (SID) in Toulouse, working as a data scientist apprentice at Dalkia since August 2026. I handle anything data and AI there: heat substation modeling, task automation, dashboards and AI training for internal teams.",
+      "p2": "What I enjoy most is shipping a complete tool, not just a model in a notebook. On my side project Variant, I build everything: the Python pipelines, the vision model that recognizes cards, the API and the mobile and web apps.",
+      "p3": "Longer term, I'd like to work in AI abroad, ideally in China."
     }
   },
   "skills": {
     "title": "Skills",
-    "categories": {
-      "programming": "Programming Languages",
-      "ml": "Machine Learning",
-      "visualization": "Visualization"
+    "hint": "Hover a hexagon to lift it, click to flip it.",
+    "hintTouch": "Tap a hexagon to flip it.",
+    "items": {
+      "python": "Dalkia, Météo-France, Variant",
+      "pytorch": "DINOv2 fine-tuning",
+      "pandas": "Data processing",
+      "numpy": "Math & models",
+      "sklearn": "Predictive models",
+      "tensorflow": "MNIST, Snake AI",
+      "postgresql": "Variant + pgvector",
+      "typescript": "Variant monorepo",
+      "powerbi": "Business dashboards",
+      "react": "Variant mobile app",
+      "nextjs": "Variant website",
+      "vue": "This portfolio",
+      "docker": "Deployment",
+      "git": "GitHub CI/CD"
     }
   },
   "education": {
-    "title": "Education",
+    "title": "Background",
+    "types": {
+      "work": "Experience",
+      "school": "Education"
+    },
     "items": [
       {
-        "period": "2025 - 2026",
-        "degree": "Bachelor's Degree in Computer Science: Data Administration and Management",
-        "institution": "IUT, University of Toulouse",
-        "description": "Advanced learning of Artificial Intelligence and Machine Learning techniques",
-        "skills": ["Python", "TensorFlow", "SQL"]
+        "type": "work",
+        "period": "Since Aug. 2026",
+        "degree": "Data Scientist Apprentice",
+        "institution": "Dalkia (EDF Group), Toulouse",
+        "description": "Heat substation modeling and optimization, automating business tasks with AI, dashboards and AI training for internal teams.",
+        "skills": ["Python", "AI", "Dataviz"]
       },
       {
-        "period": "2023 - 2025",
-        "degree": "Technical Degree in Computer Science: Data Administration and Management",
-        "institution": "IUT, University of Toulouse",
-        "description": "Advanced learning of Artificial Intelligence and Machine Learning techniques",
-        "skills": ["Java", "SQL", "AGILE Methods"]
+        "type": "school",
+        "period": "2026 – 2028",
+        "degree": "MSc in Data Science & Engineering (SID)",
+        "institution": "FSI, University of Toulouse",
+        "description": "Work-study Master's focused on machine learning, statistics and data engineering.",
+        "skills": ["Machine Learning", "Statistics", "Data Engineering"]
       },
       {
-        "period": "2020 - 2023",
-        "degree": "High School Diploma - Mathematics and Computer Science",
-        "institution": "Jean Baptiste De Baudre High School",
-        "description": "Programming basics and web development. First team projects.",
-        "skills": ["HTML/CSS", "JavaScript", "PHP"]
+        "type": "work",
+        "period": "Apr. – Jun. 2026",
+        "degree": "Internship – Documentation & AI project",
+        "institution": "Météo-France, Toulouse",
+        "description": "Set up MFAI documentation with Sphinx, improved visualization scripts, data processing and models.",
+        "skills": ["Python", "Sphinx", "Dataviz"]
+      },
+      {
+        "type": "work",
+        "period": "Apr. – Jun. 2025",
+        "degree": "Internship – Collaborative lab platform",
+        "institution": "IRIT, Toulouse",
+        "description": "Web development in JavaScript, LTI protocol integration and a voice chat server.",
+        "skills": ["JavaScript", "LTI", "Web"]
+      },
+      {
+        "type": "school",
+        "period": "2023 – 2026",
+        "degree": "Bachelor of Technology in Computer Science – Data track",
+        "institution": "IUT of Toulouse (Rangueil)",
+        "description": "Software development, databases, BI and first machine learning models.",
+        "skills": ["SQL", "Java", "Power BI"]
       }
     ]
   },
@@ -65,17 +104,25 @@
     "showLess": "Show less",
     "items": [
       {
+        "id": 4,
+        "title": "Variant",
+        "description": "Mobile and web app to manage a TCG card collection (Pokémon, One Piece…). TypeScript monorepo with a tRPC API, a card scanner built on a fine-tuned DINOv2 (90% recall@1 on real photos) and Python pipelines for the catalog and prices.",
+        "technologies": ["React Native", "Next.js", "PyTorch", "PostgreSQL"],
+        "github": "",
+        "demo": ""
+      },
+      {
         "id": 1,
         "title": "Blindio",
-        "description": "Design and development of a randomly generated blind test application. Blindio is an application that allows you to customize your blind tests according to a set of parameters and easily modifiable through the YouTube API.",
-        "technologies": ["Web", "Vue.js", "API"],
+        "description": "Randomly generated, customizable blind tests built on the YouTube API.",
+        "technologies": ["Vue.js", "API", "Web"],
         "github": "",
         "demo": "http://51.75.194.39:8080/#/blindio"
       },
       {
         "id": 2,
         "title": "MNIST Digit Recognizer",
-        "description": "The goal of this project was to introduce myself to machine learning via TensorFlow by using neural networks to recognize handwritten digits from the famous MNIST dataset. I was also able to create my own algorithm using only NumPy.",
+        "description": "My first machine learning project: handwritten digit recognition with TensorFlow, then a neural network rewritten from scratch in NumPy to understand what happens inside.",
         "technologies": ["AI", "TensorFlow", "NumPy"],
         "github": "",
         "demo": ""
@@ -83,7 +130,7 @@
       {
         "id": 3,
         "title": "Snake Game AI",
-        "description": "After exploring the basics of machine learning with the MNIST project, I decided to push my skills further by developing an AI capable of playing the Snake game. Using Deep Reinforcement Learning techniques, I trained a model to maximize its score by learning to navigate the game environment.",
+        "description": "An AI that learns to play Snake through Deep Reinforcement Learning, maximizing its score game after game.",
         "technologies": ["AI", "TensorFlow", "NumPy"],
         "github": "",
         "demo": ""
@@ -91,8 +138,8 @@
     ]
   },
   "contact": {
-    "title": "Get in Touch",
-    "subtitle": "Let's discuss your next project",
+    "title": "Contact me",
+    "subtitle": "A question or an opportunity? Drop me a line.",
     "location": "Location",
     "form": {
       "name": "Name",
@@ -103,16 +150,16 @@
       "subjectPlaceholder": "Subject of your message",
       "message": "Message",
       "messagePlaceholder": "Your message...",
-      "send": "Send Message",
+      "send": "Send message",
       "sending": "Sending...",
-      "success": "Message sent successfully! I will get back to you soon.",
+      "success": "Message sent! I'll get back to you soon.",
       "error": "Error sending message. Please try again."
     }
   },
   "footer": {
-    "description": "Data Science student passionate about AI and Machine Learning. Always looking for new challenges and learning opportunities.",
-    "quickLinks": "Quick Links",
-    "followMe": "Follow Me",
+    "description": "Data Scientist apprentice at Dalkia, Master's student in Data Science in Toulouse.",
+    "quickLinks": "Quick links",
+    "followMe": "Find me",
     "rights": "All rights reserved."
   }
 }
