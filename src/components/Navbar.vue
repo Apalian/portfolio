@@ -1,13 +1,13 @@
 <template>
   <div
     ref="navbarContainer"
-    class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-6 md:py-8 pointer-events-none"
+    class="fixed top-0 left-0 w-full z-50 px-3 py-3 md:px-6 md:py-8 pointer-events-none"
     @mouseenter="handleNavbarHover"
   >
     <div class="max-w-6xl mx-auto">
       <nav
         ref="navbarRef"
-        class="relative bg-white/95 backdrop-blur-lg border border-white/30 rounded-2xl px-8 py-4 shadow-lg pointer-events-auto"
+        class="relative bg-white/95 backdrop-blur-lg border border-white/30 rounded-2xl px-4 py-2.5 md:px-8 md:py-4 shadow-lg pointer-events-auto"
       >
         <!-- Desktop Menu -->
         <div class="hidden md:flex justify-between items-center">
@@ -18,10 +18,10 @@
               :href="item.href"
               ref="menuLinksRef"
               :class="[
-                'relative py-3 px-5 text-gray-600 no-underline font-medium rounded-lg transition-colors hover:text-kelly-green inline-block',
+                'relative py-3 px-4 lg:px-5 text-gray-600 no-underline font-medium rounded-lg transition-colors hover:text-kelly-green inline-block',
                 { 'text-kelly-green': activeSection === item.id }
               ]"
-              :style="{ minWidth: '100px', textAlign: 'center' }"
+              :style="{ textAlign: 'center' }"
               @click="handleNavClick(item.id, $event)"
               @mouseenter="animateHover(index, true)"
               @mouseleave="animateHover(index, false)"
@@ -33,6 +33,16 @@
               ></div>
             </a>
           </div>
+
+          <!-- CV -->
+          <a
+            :href="resumeUrl"
+            target="_blank"
+            rel="noopener"
+            class="nav-cv ml-2 px-4 py-2 rounded-lg bg-linear-to-r from-kelly-green to-dark-lemon text-white font-semibold text-sm shadow-sm"
+          >
+            {{ t('nav.resume') }}
+          </a>
 
           <!-- Language Switcher -->
           <div class="relative flex bg-gray-100 rounded-lg p-1 ml-4">
@@ -70,36 +80,36 @@
         <!-- Mobile Menu -->
         <div class="flex md:hidden justify-between items-center">
           <!-- Logo ou Titre -->
-          <div class="text-xl font-bold text-gray-800">Colin Lespilette</div>
+          <a href="#hero" @click="handleMobileNavClick('hero', $event)" class="text-lg font-bold text-gray-800 whitespace-nowrap">Colin Lespilette</a>
 
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
             <!-- Language Switcher Mobile -->
             <div class="relative flex bg-gray-100 rounded-lg p-1">
               <div
-                class="absolute inset-y-1 left-1 w-10 bg-linear-to-r from-kelly-green to-dark-lemon rounded-md transition-transform duration-300 ease-out"
+                class="absolute inset-y-1 left-1 w-8 bg-linear-to-r from-kelly-green to-dark-lemon rounded-md transition-transform duration-300 ease-out"
                 :style="{ transform: locale === 'fr' ? 'translateX(0)' : 'translateX(100%)' }"
               ></div>
 
               <button
                 @click="changeLocale('fr')"
                 :class="[
-                  'relative z-10 px-3 py-2 rounded-md transition-colors duration-300',
+                  'relative z-10 px-2 py-1 rounded-md transition-colors duration-300',
                   locale === 'fr' ? 'text-white' : 'text-gray-600'
                 ]"
                 title="Français"
               >
-                <span class="text-xl">🇫🇷</span>
+                <span class="text-base">🇫🇷</span>
               </button>
 
               <button
                 @click="changeLocale('en')"
                 :class="[
-                  'relative z-10 px-3 py-2 rounded-md transition-colors duration-300',
+                  'relative z-10 px-2 py-1 rounded-md transition-colors duration-300',
                   locale === 'en' ? 'text-white' : 'text-gray-600'
                 ]"
                 title="English"
               >
-                <span class="text-xl">🇬🇧</span>
+                <span class="text-base">🇬🇧</span>
               </button>
             </div>
 
@@ -157,6 +167,14 @@
               >
                 {{ t(item.labelKey) }}
               </a>
+              <a
+                :href="resumeUrl"
+                target="_blank"
+                rel="noopener"
+                class="mt-2 py-3 px-4 text-center rounded-lg bg-linear-to-r from-kelly-green to-dark-lemon text-white font-semibold"
+              >
+                {{ t('nav.resume') }}
+              </a>
             </div>
           </div>
         </transition>
@@ -166,7 +184,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { useI18n } from 'vue-i18n'
@@ -174,6 +192,7 @@ import { useLanguage } from '../composables/useLanguage'
 
 const { locale, changeLocale } = useLanguage()
 const { t } = useI18n()
+const resumeUrl = computed(() => (locale.value === 'en' ? './resume-en.pdf' : './resume-fr.pdf'))
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -393,3 +412,16 @@ onUnmounted(() => {
   sectionObserver?.disconnect()
 })
 </script>
+
+<style scoped>
+.nav-cv {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+
+.nav-cv:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -6px rgb(73 161 21 / 0.5);
+}
+</style>

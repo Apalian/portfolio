@@ -1,21 +1,21 @@
 <template>
-  <section id="projects" class="min-h-screen bg-white py-20">
-    <div class="max-w-6xl mx-auto px-6">
+  <section id="projects" class="bg-gray-50 py-20">
+    <div class="max-w-6xl mx-auto px-5 md:px-6">
       <!-- Header -->
-      <div ref="headerRef" class="text-center mb-16 opacity-0">
-        <h2 class="text-5xl font-bold text-gray-800 mb-4">{{ t('projects.title') }}</h2>
+      <div ref="headerRef" class="text-center mb-12 md:mb-16 opacity-0">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{{ t('projects.title') }}</h2>
         <div
           class="w-24 h-1 bg-linear-to-r from-kelly-green via-dark-lemon to-acid-green mx-auto"
         ></div>
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" ref="projectsGridRef">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" ref="projectsGridRef">
         <div
           v-for="(project, index) in displayedProjects"
           :key="project.id"
           :ref="(el) => setProjectRef(el, index)"
-          class="project-card opacity-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+          class="project-card opacity-0 bg-white rounded-xl shadow-md overflow-hidden group flex flex-col"
         >
           <!-- Image du projet -->
           <div class="relative h-48 overflow-hidden bg-gray-100">
@@ -27,7 +27,8 @@
 
             <!-- Overlay au hover avec boutons -->
             <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              v-if="project.github || project.demo"
+              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden [@media(hover:hover)]:flex items-center justify-center"
             >
               <div class="flex space-x-4">
                 <a
@@ -53,11 +54,11 @@
             </div>
           </div>
 
-          <div class="p-6">
+          <div class="p-5 md:p-6 flex-1">
             <h3 class="text-xl font-bold text-gray-800 mb-2">{{ project.title }}</h3>
             <p class="text-gray-600 text-sm mb-4">{{ project.description }}</p>
 
-            <div class="flex flex-wrap gap-2 mb-4">
+            <div class="flex flex-wrap gap-2">
               <span
                 v-for="tech in project.technologies"
                 :key="tech"
@@ -65,6 +66,23 @@
               >
                 {{ tech }}
               </span>
+            </div>
+            <!-- Liens visibles sur écran tactile (pas de survol) -->
+            <div v-if="project.github || project.demo" class="flex gap-3 mt-4 [@media(hover:hover)]:hidden">
+              <a
+                v-if="project.github"
+                :href="project.github"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-medium text-gray-700 underline underline-offset-4"
+              >GitHub</a>
+              <a
+                v-if="project.demo"
+                :href="project.demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-medium text-kelly-green underline underline-offset-4"
+              >{{ t('projects.viewDemo') }} →</a>
             </div>
           </div>
         </div>
@@ -90,6 +108,7 @@ import { useI18n } from 'vue-i18n'
 import blindioCover from '@/assets/images/blindioCover.svg'
 import mnistCover from '@/assets/images/mnistCover.webp'
 import snakeCover from '@/assets/images/snakeCover.png'
+import variantCover from '@/assets/images/variantCover.svg'
 
 const { t, tm } = useI18n()
 
@@ -125,7 +144,8 @@ const setProjectRef = (el: Element | ComponentPublicInstance | null, index: numb
 const projectImages: Record<number, string> = {
   1: blindioCover,
   2: mnistCover,
-  3: snakeCover
+  3: snakeCover,
+  4: variantCover,
 }
 
 // Computed projects avec traductions
@@ -161,6 +181,7 @@ const animateProjects = () => {
           duration: 0.8,
           delay,
           ease: 'back.out(1.7)',
+          clearProps: 'transform',
         }
       )
     }
@@ -192,6 +213,7 @@ const toggleShowAll = async () => {
           duration: 0.8,
           delay: index * 0.1,
           ease: 'back.out(1.7)',
+          clearProps: 'transform',
         })
       }
     })
@@ -223,3 +245,18 @@ onUnmounted(() => {
   if (observer) observer.disconnect()
 })
 </script>
+
+<style scoped>
+.project-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 40px -16px rgb(73 161 21 / 0.4);
+  }
+}
+</style>

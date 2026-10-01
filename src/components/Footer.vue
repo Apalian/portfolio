@@ -69,6 +69,16 @@
                 {{ t('nav.contact') }}
               </a>
             </li>
+            <li>
+              <a
+                :href="locale === 'en' ? './resume-en.pdf' : './resume-fr.pdf'"
+                target="_blank"
+                rel="noopener"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                {{ t('nav.resume') }}
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -106,7 +116,7 @@
 
             <!-- Email -->
             <a
-              href="mailto:colin.lespilette@example.com"
+              href="mailto:colinlespilette@gmail.com"
               class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-linear-to-br hover:from-kelly-green hover:to-acid-green transition-all duration-300 transform hover:scale-110"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,7 +151,7 @@ import { useI18n } from 'vue-i18n'
 
 gsap.registerPlugin(ScrollToPlugin)
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Refs
 const aboutRef = ref<HTMLElement>()

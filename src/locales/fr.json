@@ -2,59 +2,98 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
-    "education": "Formation",
+    "education": "Parcours",
     "skills": "Compétences",
     "projects": "Projets",
-    "contact": "Contact"
+    "contact": "Contact",
+    "resume": "CV"
   },
   "hero": {
-    "subtitle": "Étudiant Data Scientist"
+    "subtitle": "Data Scientist en alternance chez Dalkia",
+    "resume": "Voir mon CV",
+    "contact": "Me contacter"
   },
   "about": {
     "title": "À propos",
     "location": "Localisation",
     "locationValue": "Toulouse, France",
     "education": "Formation",
-    "educationValue": "Bac +3",
-    "specialty": "Spécialité",
-    "specialtyValue": "Data & Machine Learning",
+    "educationValue": "Master SID (Bac +4/5)",
+    "specialty": "Poste",
+    "specialtyValue": "Data Scientist en alternance, Dalkia (groupe EDF)",
     "description": {
-      "p1": "Passionné par l'apprentissage automatique et l'intelligence artificielle, je suis toujours à la recherche de nouvelles façons d'exploiter les données pour résoudre des problèmes réels.",
-      "p2": "Grace à mes expériences en projets académiques et personnels, j'ai développé des compétences solides en Python, TensorFlow, et SQL, ainsi qu'une compréhension approfondie des algorithmes de machine learning.",
-      "p3": "Je suis enthousiaste à l'idée de collaborer sur des projets innovants qui repoussent les limites de la technologie et apportent une réelle valeur ajoutée."
+      "p1": "Je suis en Master SID (Sciences et Ingénierie des Données) à Toulouse, en alternance chez Dalkia depuis août 2026. J'y travaille sur tout ce qui touche à la data et à l'IA : modélisation de sous-stations de chaleur, automatisation de tâches, dashboards et formations pour les équipes.",
+      "p2": "Ce qui me plaît, c'est de livrer un outil complet, pas seulement un modèle dans un notebook. Sur mon projet perso Variant, je gère tout : les pipelines Python, le modèle de vision qui reconnaît les cartes, l'API et les applis mobile et web.",
+      "p3": "À terme, j'aimerais travailler dans l'IA à l'international, idéalement en Chine."
     }
   },
   "skills": {
     "title": "Compétences",
-    "categories": {
-      "programming": "Langages de Programmation",
-      "ml": "Machine Learning",
-      "visualization": "Visualisation"
+    "hint": "Survole un hexagone pour le soulever, clique pour le retourner.",
+    "hintTouch": "Touche un hexagone pour le retourner.",
+    "items": {
+      "python": "Dalkia, Météo-France, Variant",
+      "pytorch": "Fine-tuning DINOv2",
+      "pandas": "Data processing",
+      "numpy": "Calcul & modèles",
+      "sklearn": "Modèles prédictifs",
+      "tensorflow": "MNIST, Snake AI",
+      "postgresql": "Variant + pgvector",
+      "typescript": "Monorepo Variant",
+      "powerbi": "Dashboards métier",
+      "react": "App mobile Variant",
+      "nextjs": "Site web Variant",
+      "vue": "Ce portfolio",
+      "docker": "Déploiement",
+      "git": "CI/CD GitHub"
     }
   },
   "education": {
-    "title": "Formation",
+    "title": "Parcours",
+    "types": {
+      "work": "Expérience",
+      "school": "Formation"
+    },
     "items": [
       {
-        "period": "2025 - 2026",
-        "degree": "BUT Informatique : Administration Gestion et Exploitation des Données",
-        "institution": "IUT, Université de Toulouse",
-        "description": "Apprentissage avancé des techniques d'Intelligence Artificielle et de Machine Learning",
-        "skills": ["Python", "TensorFlow", "SQL"]
+        "type": "work",
+        "period": "Depuis août 2026",
+        "degree": "Data Scientist en alternance",
+        "institution": "Dalkia (groupe EDF), Toulouse",
+        "description": "Modélisation et optimisation de sous-stations de chaleur, automatisation de tâches métier avec l'IA, dashboards et formations IA pour les équipes.",
+        "skills": ["Python", "IA", "Dataviz"]
       },
       {
-        "period": "2023 - 2025",
-        "degree": "DUT Informatique : Administration Gestion et Exploitation des Données",
-        "institution": "IUT, Université de Toulouse",
-        "description": "Apprentissage avancé des techniques d'Intelligence Artificielle et de Machine Learning",
-        "skills": ["Java", "SQL", "Méthodes AGILES"]
+        "type": "school",
+        "period": "2026 – 2028",
+        "degree": "Master SID – Sciences et Ingénierie des Données",
+        "institution": "FSI, Université de Toulouse",
+        "description": "Master en alternance orienté machine learning, statistiques et ingénierie des données.",
+        "skills": ["Machine Learning", "Statistiques", "Data Engineering"]
       },
       {
-        "period": "2020 - 2023",
-        "degree": "Baccalauréat - Mathématiques et Numérique et Sciences Informatiques",
-        "institution": "Lycée Jean Baptiste De Baudre",
-        "description": "Bases de la programmation et développement web. Premiers projets en équipe.",
-        "skills": ["HTML/CSS", "JavaScript", "PHP"]
+        "type": "work",
+        "period": "Avr. – Juin 2026",
+        "degree": "Stage – Documentation et projet d'IA",
+        "institution": "Météo-France, Toulouse",
+        "description": "Mise en place de la documentation de MFAI avec Sphinx, amélioration des scripts de visualisation, du data processing et des modèles.",
+        "skills": ["Python", "Sphinx", "Dataviz"]
+      },
+      {
+        "type": "work",
+        "period": "Avr. – Juin 2025",
+        "degree": "Stage – Plateforme de TP collaboratifs",
+        "institution": "IRIT, Toulouse",
+        "description": "Développement web en JavaScript, intégration du protocole LTI et mise en place d'un serveur de chat vocal.",
+        "skills": ["JavaScript", "LTI", "Web"]
+      },
+      {
+        "type": "school",
+        "period": "2023 – 2026",
+        "degree": "BUT Informatique – parcours données (AGED)",
+        "institution": "IUT de Toulouse (Rangueil)",
+        "description": "Développement, bases de données, BI et premiers modèles de machine learning.",
+        "skills": ["SQL", "Java", "Power BI"]
       }
     ]
   },
@@ -65,26 +104,34 @@
     "showLess": "Voir moins",
     "items": [
       {
+        "id": 4,
+        "title": "Variant",
+        "description": "Application mobile et web pour gérer sa collection de cartes TCG (Pokémon, One Piece…). Monorepo TypeScript avec une API tRPC, un scanner de cartes basé sur DINOv2 fine-tuné (90 % de recall@1 sur de vraies photos) et des pipelines Python pour le catalogue et les prix.",
+        "technologies": ["React Native", "Next.js", "PyTorch", "PostgreSQL"],
+        "github": "",
+        "demo": ""
+      },
+      {
         "id": 1,
         "title": "Blindio",
-        "description": "Design et développement d'une application de blindtests générés aléatoirement. Blindio est une application permettant de customiser ses blindtests selon un ensemble de paramètres et facilement modulable par le biais de l'API Youtube.",
-        "technologies": ["Web", "Vue.js", "API"],
+        "description": "Application de blindtests générés aléatoirement, paramétrables et basés sur l'API YouTube.",
+        "technologies": ["Vue.js", "API", "Web"],
         "github": "",
         "demo": "http://51.75.194.39:8080/#/blindio"
       },
       {
         "id": 2,
         "title": "MNIST Digit Recognizer",
-        "description": "L'objectif de ce projet était de m'introduire a l'apprentissage automatique via Tensorflow en utilisant des réseaux de neurones pour reconnaître des chiffres manuscrits à partir du célèbre jeu de données MNIST. J'ai également pu faire mon propre algorithme en utilisant uniquement Numpy.",
-        "technologies": ["AI", "TensorFlow", "NumPy"],
+        "description": "Mon premier projet de machine learning : reconnaissance de chiffres manuscrits avec TensorFlow, puis un réseau de neurones réécrit à la main avec NumPy pour comprendre ce qui se passe dedans.",
+        "technologies": ["IA", "TensorFlow", "NumPy"],
         "github": "",
         "demo": ""
       },
       {
         "id": 3,
         "title": "Snake Game AI",
-        "description": "Après avoir exploré les bases de l'apprentissage automatique avec le projet MNIST, j'ai décidé de pousser mes compétences plus loin en développant une IA capable de jouer au jeu du Snake. En utilisant des techniques de Deep Reinforcement Learning, j'ai entraîné un modèle à maximiser son score en apprenant à naviguer dans l'environnement du jeu.",
-        "technologies": ["AI", "TensorFlow", "NumPy"],
+        "description": "Une IA qui apprend à jouer au Snake par Deep Reinforcement Learning, en cherchant à maximiser son score au fil des parties.",
+        "technologies": ["IA", "TensorFlow", "NumPy"],
         "github": "",
         "demo": ""
       }
@@ -92,7 +139,7 @@
   },
   "contact": {
     "title": "Contactez-moi",
-    "subtitle": "Discutons de votre prochain projet",
+    "subtitle": "Une question, une opportunité ? Écris-moi.",
     "location": "Localisation",
     "form": {
       "name": "Nom",
@@ -110,9 +157,9 @@
     }
   },
   "footer": {
-    "description": "Étudiant en Data Science passionné par l'IA et le Machine Learning. Toujours à la recherche de nouveaux défis et d'opportunités d'apprentissage.",
-    "quickLinks": "Liens Rapides",
-    "followMe": "Suivez-moi",
+    "description": "Data Scientist en alternance chez Dalkia, étudiant en Master SID à Toulouse.",
+    "quickLinks": "Liens rapides",
+    "followMe": "Me retrouver",
     "rights": "Tous droits réservés."
   }
 }

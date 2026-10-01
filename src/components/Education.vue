@@ -1,9 +1,9 @@
 <template>
-  <section id="education" class="min-h-screen bg-white py-20">
-    <div class="max-w-4xl mx-auto px-6">
+  <section id="education" class="bg-white py-20">
+    <div class="max-w-4xl mx-auto px-5 md:px-6">
       <!-- Header -->
-      <div ref="headerRef" class="text-center mb-16 opacity-0">
-        <h2 class="text-5xl font-bold text-gray-800 mb-4">{{ t('education.title') }}</h2>
+      <div ref="headerRef" class="text-center mb-12 md:mb-16 opacity-0">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{{ t('education.title') }}</h2>
         <div
           class="w-24 h-1 bg-linear-to-r from-kelly-green via-dark-lemon to-acid-green mx-auto animated-background"
         ></div>
@@ -11,98 +11,60 @@
 
       <!-- Timeline -->
       <div class="relative">
-        <!-- Ligne verticale -->
         <div
-          class="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-gray-300"
+          class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-0.5 h-full bg-linear-to-b from-kelly-green via-dark-lemon to-acid-green/30"
         ></div>
 
-        <!-- Timeline Items -->
-        <div class="space-y-12">
-          <!-- Item 1 -->
-          <div ref="timelineRef1" class="relative flex items-center opacity-0">
+        <div class="space-y-8 md:space-y-10">
+          <div
+            v-for="(item, index) in items"
+            :key="index"
+            :ref="(el) => setItemRef(el, index)"
+            class="relative flex opacity-0"
+          >
+            <!-- Point -->
             <div
-              class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-kelly-green rounded-full border-4 border-white shadow-lg z-10"
+              class="absolute left-3 md:left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow z-10"
+              :class="item.type === 'work' ? 'bg-kelly-green' : 'bg-acid-green'"
             ></div>
 
-            <div class="ml-16 md:ml-0 md:w-5/12 md:pr-8 md:text-right">
-              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                <div class="text-sm font-semibold text-kelly-green mb-2">
-                  {{ educationItems[0].period }}
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">
-                  {{ educationItems[0].degree }}
-                </h3>
-                <p class="text-gray-600 mb-3">{{ educationItems[0].institution }}</p>
-                <p class="text-sm text-gray-500">
-                  {{ educationItems[0].description }}
-                </p>
-                <div class="flex flex-wrap gap-2 mt-3 md:justify-end">
+            <div
+              class="w-full pl-9 md:pl-0 md:w-1/2"
+              :class="index % 2 === 0 ? 'md:pr-10' : 'md:ml-auto md:pl-10'"
+            >
+              <div
+                class="timeline-card bg-gray-50 p-5 md:p-6 rounded-xl shadow-sm border border-gray-100"
+                :class="index % 2 === 0 ? 'md:text-right' : ''"
+              >
+                <div
+                  class="flex flex-wrap items-center gap-2 mb-2"
+                  :class="index % 2 === 0 ? 'md:justify-end' : ''"
+                >
                   <span
-                    v-for="(skill, index) in educationItems[0].skills"
-                    :key="index"
+                    class="text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded"
+                    :class="
+                      item.type === 'work'
+                        ? 'bg-kelly-green text-white'
+                        : 'bg-acid-green/15 text-[#7d8a06]'
+                    "
+                  >
+                    {{ t(`education.types.${item.type}`) }}
+                  </span>
+                  <span class="text-sm font-semibold text-kelly-green">{{ item.period }}</span>
+                </div>
+                <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1 leading-snug">
+                  {{ item.degree }}
+                </h3>
+                <p class="text-gray-600 mb-3 text-sm md:text-base">{{ item.institution }}</p>
+                <p class="text-sm text-gray-500 leading-relaxed">{{ item.description }}</p>
+                <div
+                  class="flex flex-wrap gap-2 mt-3"
+                  :class="index % 2 === 0 ? 'md:justify-end' : ''"
+                >
+                  <span
+                    v-for="skill in item.skills"
+                    :key="skill"
                     class="px-3 py-1 bg-kelly-green/10 text-kelly-green rounded-full text-xs"
-                  >
-                    {{ skill }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 2 -->
-          <div ref="timelineRef2" class="relative flex items-center opacity-0">
-            <div
-              class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-dark-lemon rounded-full border-4 border-white shadow-lg z-10"
-            ></div>
-
-            <div class="ml-16 md:w-5/12 md:ml-auto md:pl-8">
-              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                <div class="text-sm font-semibold text-dark-lemon mb-2">
-                  {{ educationItems[1].period }}
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">
-                  {{ educationItems[1].degree }}
-                </h3>
-                <p class="text-gray-600 mb-3">{{ educationItems[1].institution }}</p>
-                <p class="text-sm text-gray-500">
-                  {{ educationItems[1].description }}
-                </p>
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <span
-                    v-for="(skill, index) in educationItems[1].skills"
-                    :key="index"
-                    class="px-3 py-1 bg-dark-lemon/10 text-dark-lemon rounded-full text-xs"
-                  >
-                    {{ skill }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div ref="timelineRef3" class="relative flex items-center opacity-0">
-            <div
-              class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-acid-green rounded-full border-4 border-white shadow-lg z-10"
-            ></div>
-
-            <div class="ml-16 md:ml-0 md:w-5/12 md:pr-8 md:text-right">
-              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                <div class="text-sm font-semibold text-acid-green mb-2">
-                  {{ educationItems[2].period }}
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">
-                  {{ educationItems[2].degree }}
-                </h3>
-                <p class="text-gray-600 mb-3">{{ educationItems[2].institution }}</p>
-                <p class="text-sm text-gray-500">
-                  {{ educationItems[2].description }}
-                </p>
-                <div class="flex flex-wrap gap-2 mt-3 md:justify-end">
-                  <span
-                    v-for="(skill, index) in educationItems[2].skills"
-                    :key="index"
-                    class="px-3 py-1 bg-acid-green/10 text-acid-green rounded-full text-xs"
                   >
                     {{ skill }}
                   </span>
@@ -121,87 +83,76 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { useI18n } from 'vue-i18n'
 
-const { t, locale } = useI18n()
+const { t, tm, rt } = useI18n()
+
+interface Item {
+  type: 'work' | 'school'
+  period: string
+  degree: string
+  institution: string
+  description: string
+  skills: string[]
+}
+
+const items = computed<Item[]>(() =>
+  (tm('education.items') as any[]).map((i) => ({
+    type: rt(i.type) as Item['type'],
+    period: rt(i.period),
+    degree: rt(i.degree),
+    institution: rt(i.institution),
+    description: rt(i.description),
+    skills: (i.skills as any[]).map((s) => rt(s)),
+  }))
+)
 
 const headerRef = ref<HTMLElement>()
-const timelineRef1 = ref<HTMLElement>()
-const timelineRef2 = ref<HTMLElement>()
-const timelineRef3 = ref<HTMLElement>()
+const itemRefs: HTMLElement[] = []
+const setItemRef = (el: unknown, i: number) => {
+  if (el) itemRefs[i] = el as HTMLElement
+}
 
 let observer: IntersectionObserver
 
-// Données d'éducation avec computed pour la réactivité
-const educationItems = computed(() => [
-  {
-    period: t('education.items[0].period'),
-    degree: t('education.items[0].degree'),
-    institution: t('education.items[0].institution'),
-    description: t('education.items[0].description'),
-    skills: ['Python', 'TensorFlow', 'SQL'],
-    color: 'kelly-green'
-  },
-  {
-    period: t('education.items[1].period'),
-    degree: t('education.items[1].degree'),
-    institution: t('education.items[1].institution'),
-    description: t('education.items[1].description'),
-    skills: locale.value === 'fr' ? ['Java', 'SQL', 'Méthodes AGILES'] : ['Java', 'SQL', 'AGILE Methods'],
-    color: 'dark-lemon'
-  },
-  {
-    period: t('education.items[2].period'),
-    degree: t('education.items[2].degree'),
-    institution: t('education.items[2].institution'),
-    description: t('education.items[2].description'),
-    skills: ['HTML/CSS', 'JavaScript', 'PHP'],
-    color: 'acid-green'
-  }
-])
-
-const animateHeader = (element: Element) => {
-  gsap.fromTo(
-    element,
-    { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power2.out' }
-  )
-}
-
-const animateTimelineItem = (element: Element, direction: 'left' | 'right') => {
-  const xStart = direction === 'left' ? -100 : 100
-  gsap.fromTo(
-    element,
-    { opacity: 0, x: xStart, scale: 0.8 },
-    { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }
-  )
-}
-
 onMounted(() => {
+  const isDesktop = window.matchMedia('(min-width: 768px)').matches
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target === headerRef.value) {
-            animateHeader(entry.target)
-          } else if (entry.target === timelineRef1.value) {
-            animateTimelineItem(entry.target, 'right')
-          } else if (entry.target === timelineRef2.value) {
-            animateTimelineItem(entry.target, 'left')
-          } else if (entry.target === timelineRef3.value) {
-            animateTimelineItem(entry.target, 'right')
-          }
-          observer.unobserve(entry.target)
+        if (!entry.isIntersecting) return
+        const el = entry.target as HTMLElement
+        if (el === headerRef.value) {
+          gsap.fromTo(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
+        } else {
+          const i = itemRefs.indexOf(el)
+          const fromX = isDesktop ? (i % 2 === 0 ? -60 : 60) : 30
+          gsap.fromTo(
+            el,
+            { opacity: 0, x: fromX },
+            { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }
+          )
         }
+        observer.unobserve(el)
       })
     },
-    { threshold: 0.3 }
+    { threshold: 0.2 }
   )
-  const elements = [headerRef.value, timelineRef1.value, timelineRef2.value, timelineRef3.value]
-  elements.forEach((el) => {
-    if (el) observer.observe(el)
-  })
+  ;[headerRef.value, ...itemRefs].forEach((el) => el && observer.observe(el))
 })
 
-onUnmounted(() => {
-  if (observer) observer.disconnect()
-})
+onUnmounted(() => observer?.disconnect())
 </script>
+
+<style scoped>
+.timeline-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+@media (hover: hover) {
+  .timeline-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px -12px rgb(73 161 21 / 0.35);
+  }
+}
+</style>

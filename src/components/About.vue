@@ -1,32 +1,32 @@
 <template>
-  <section id="about" class="min-h-screen bg-gray-50 py-20">
-    <div class="max-w-6xl mx-auto px-6">
+  <section id="about" class="bg-gray-50 py-20">
+    <div class="max-w-6xl mx-auto px-5 md:px-6">
       <!-- Header -->
-      <div ref="headerRef" class="text-center mb-16 opacity-0">
-        <h2 class="text-5xl font-bold text-gray-800 mb-4">{{ t('about.title') }}</h2>
+      <div ref="headerRef" class="text-center mb-12 md:mb-16 opacity-0">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{{ t('about.title') }}</h2>
         <div
           class="w-24 h-1 bg-linear-to-r from-kelly-green via-dark-lemon to-acid-green mx-auto animated-background"
         ></div>
       </div>
 
       <!-- Contenu principal -->
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <!-- Photo + info -->
         <div class="text-center lg:text-left">
           <!-- Photo placeholder -->
           <div
             ref="photoRef"
-            class="w-64 h-64 bg-gray-300 rounded-full mx-auto lg:mx-0 mb-8 opacity-0"
+            class="w-44 h-44 md:w-64 md:h-64 bg-gray-300 rounded-full mx-auto lg:mx-0 mb-8 opacity-0 ring-4 ring-white shadow-lg"
           >
             <img
-              src="/src/assets/images/profile.jpg"
+              src="@/assets/images/profile.jpg"
               alt="Colin Lespilette"
               class="w-full h-full object-cover rounded-full"
             />
           </div>
 
           <!-- Info rapide -->
-          <div ref="infoRef" class="space-y-2 text-lg text-gray-600">
+          <div ref="infoRef" class="space-y-2 text-base md:text-lg text-gray-600">
             <p class="opacity-0"><span class="font-semibold">{{ t('about.location') }}:</span> {{ t('about.locationValue') }}</p>
             <p class="opacity-0"><span class="font-semibold">{{ t('about.education') }}:</span> {{ t('about.educationValue') }}</p>
             <p class="opacity-0">
@@ -37,15 +37,15 @@
 
         <!-- Texte description -->
         <div ref="textRef" class="space-y-6">
-          <p class="text-lg text-gray-700 leading-relaxed opacity-0">
+          <p class="text-base md:text-lg text-gray-700 leading-relaxed opacity-0">
             {{ t('about.description.p1') }}
           </p>
 
-          <p class="text-lg text-gray-700 leading-relaxed opacity-0">
+          <p class="text-base md:text-lg text-gray-700 leading-relaxed opacity-0">
             {{ t('about.description.p2') }}
           </p>
 
-          <p class="text-lg text-gray-700 leading-relaxed opacity-0">
+          <p class="text-base md:text-lg text-gray-700 leading-relaxed opacity-0">
             {{ t('about.description.p3') }}
           </p>
         </div>
