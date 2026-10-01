@@ -5,28 +5,33 @@ on:
     branches:
       - master
 
+# Autorise le token automatique de GitHub Actions à pousser sur la branche build
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Build and Push
     steps:
       - name: git-checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install all dependencies
         run: npm install
 
       - name: Build
-        run: npm run build # Le build de ton projet
+        run: npm run build
 
       - name: List files in build folder
-        run: ls -al dist  # Vérifie que tous les fichiers sont générés dans 'dist'
+        run: ls -al dist
 
       - name: Push
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: build   # La branche où tu veux pousser les fichiers
-          FOLDER: dist        # Répertoire 'dist' comme répertoire d'output
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: build
+          FOLDER: dist
+          # Token fourni automatiquement par GitHub : n'expire pas, rien à renouveler
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
